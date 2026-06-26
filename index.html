@@ -4,229 +4,444 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>윤슬코어콘텐츠</title>
-
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
-body{font-family:sans-serif;background:#0f172a;color:#fff;line-height:1.7}
+body{font-family:'Apple SD Gothic Neo','Malgun Gothic',sans-serif;background:#05050f;color:#fff;line-height:1.7;overflow-x:hidden}
 a{text-decoration:none;color:inherit}
 
+/* ── 헤더 ── */
+header{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:16px 48px;
+  background:rgba(5,5,15,.85);
+  backdrop-filter:blur(12px);
+  border-bottom:1px solid rgba(212,175,55,.15);
+}
+.logo{display:flex;align-items:center;gap:12px}
+.logo img{height:48px;border-radius:8px}
+.logo-text{display:flex;flex-direction:column}
+.logo-text .eng{font-size:10px;letter-spacing:3px;color:#d4af37;font-weight:600}
+.logo-text .kor{font-size:18px;font-weight:800;color:#fff}
+
+nav{display:flex;align-items:center;gap:32px}
+nav a{
+  font-size:14px;color:rgba(255,255,255,.75);font-weight:500;
+  display:flex;align-items:center;gap:6px;
+  transition:color .2s;
+  white-space:nowrap;
+}
+nav a:hover{color:#d4af37}
+nav .nav-icon{font-size:16px}
+
+/* ── 히어로 ── */
 .hero{
-min-height:100vh;
-display:flex;
-align-items:center;
-justify-content:center;
-text-align:center;
-padding:40px 20px;
-background:linear-gradient(135deg,#020617,#0f172a,#1e293b);
+  min-height:100vh;
+  display:flex;align-items:center;
+  padding:120px 48px 80px;
+  background:radial-gradient(ellipse at 20% 50%,rgba(212,175,55,.08) 0%,transparent 60%),
+             radial-gradient(ellipse at 80% 30%,rgba(11,132,243,.06) 0%,transparent 50%),
+             linear-gradient(135deg,#05050f 0%,#0a0a1a 60%,#0d0d20 100%);
+  position:relative;overflow:hidden;
 }
 
-.hero h1{font-size:64px;font-weight:900;margin-bottom:12px}
-.hero .eng{font-size:18px;letter-spacing:5px;color:#f97316;margin-bottom:22px}
-.hero p{font-size:22px;color:#cbd5e1;margin-bottom:36px}
-
-.btn{
-display:inline-block;
-padding:15px 32px;
-background:#f97316;
-border-radius:12px;
-font-weight:800;
+.hero::before{
+  content:'';position:absolute;inset:0;
+  background:url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23d4af37' fill-opacity='0.03'%3E%3Ccircle cx='30' cy='30' r='1'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  pointer-events:none;
 }
 
-.section{
-max-width:1200px;
-margin:auto;
-padding:90px 24px;
+.hero-left{flex:1;max-width:640px;position:relative;z-index:1}
+
+.hero-badge{
+  display:inline-flex;align-items:center;gap:8px;
+  background:rgba(212,175,55,.1);border:1px solid rgba(212,175,55,.3);
+  border-radius:100px;padding:6px 16px;
+  font-size:13px;color:#d4af37;font-weight:600;
+  margin-bottom:28px;
 }
 
-.section h2{
-font-size:38px;
-margin-bottom:34px;
+.hero h1{
+  font-size:clamp(36px,5vw,64px);
+  font-weight:900;line-height:1.2;
+  margin-bottom:20px;
+  word-break:keep-all;
+}
+.hero h1 .gold{color:#d4af37}
+
+.hero-sub{
+  font-size:clamp(16px,2vw,22px);
+  color:rgba(255,255,255,.65);
+  margin-bottom:40px;
+  font-style:italic;
+  word-break:keep-all;
 }
 
-.grid{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
-gap:24px;
+/* 서비스 아이콘 */
+.service-icons{
+  display:flex;gap:28px;flex-wrap:wrap;
+  margin-bottom:44px;
+}
+.svc{display:flex;flex-direction:column;align-items:center;gap:8px;cursor:pointer}
+.svc-icon{
+  width:56px;height:56px;border-radius:16px;
+  background:rgba(255,255,255,.06);border:1px solid rgba(212,175,55,.2);
+  display:flex;align-items:center;justify-content:center;font-size:24px;
+  transition:background .2s,border-color .2s;
+}
+.svc:hover .svc-icon{background:rgba(212,175,55,.12);border-color:#d4af37}
+.svc span{font-size:12px;color:rgba(255,255,255,.6);text-align:center;line-height:1.4}
+
+/* CTA 버튼 */
+.cta-group{display:flex;gap:16px;flex-wrap:wrap;margin-bottom:48px}
+.btn-outline{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:16px 28px;border-radius:10px;
+  border:1px solid rgba(212,175,55,.5);
+  color:#d4af37;font-size:16px;font-weight:700;
+  transition:background .2s,border-color .2s;
+}
+.btn-outline:hover{background:rgba(212,175,55,.1);border-color:#d4af37}
+.btn-gold{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:16px 28px;border-radius:10px;
+  background:linear-gradient(135deg,#d4af37,#f0d060);
+  color:#05050f;font-size:16px;font-weight:700;
+  transition:opacity .2s;
+}
+.btn-gold:hover{opacity:.9}
+
+/* SNS 링크 */
+.sns-bar{display:flex;align-items:center;gap:24px;flex-wrap:wrap}
+.sns-item{
+  display:flex;align-items:center;gap:8px;
+  font-size:13px;color:rgba(255,255,255,.5);font-weight:600;letter-spacing:1px;
+  transition:color .2s;
+}
+.sns-item:hover{color:#d4af37}
+.sns-dot{width:1px;height:16px;background:rgba(255,255,255,.15)}
+
+/* 히어로 오른쪽 */
+.hero-right{
+  flex:1;display:flex;justify-content:center;align-items:center;
+  position:relative;z-index:1;
+  padding-left:60px;
+}
+.phone-mockup{
+  display:flex;gap:20px;align-items:flex-end;
+}
+.phone{
+  background:linear-gradient(160deg,#1a1a2e,#0f0f1e);
+  border:1px solid rgba(212,175,55,.25);
+  border-radius:32px;overflow:hidden;
+  box-shadow:0 32px 80px rgba(0,0,0,.6),0 0 0 1px rgba(212,175,55,.1);
+  position:relative;
+}
+.phone-main{width:200px;height:380px}
+.phone-side{width:160px;height:300px;opacity:.85}
+.phone-side2{width:140px;height:260px;opacity:.7}
+.phone-screen{
+  width:100%;height:100%;
+  display:flex;flex-direction:column;
+  padding:20px 16px;
+  background:linear-gradient(160deg,#0a0a1a,#05050f);
+}
+.phone-label{font-size:9px;letter-spacing:2px;color:#d4af37;margin-bottom:6px}
+.phone-title{font-size:15px;font-weight:800;color:#fff;line-height:1.3;margin-bottom:8px}
+.phone-desc{font-size:10px;color:rgba(255,255,255,.5);line-height:1.5}
+.phone-img{
+  flex:1;background:linear-gradient(160deg,rgba(212,175,55,.1),rgba(11,132,243,.05));
+  border-radius:12px;margin-top:12px;
+  display:flex;align-items:center;justify-content:center;font-size:36px;
 }
 
-.card{
-background:#1e293b;
-padding:32px;
-border-radius:18px;
-border:1px solid rgba(255,255,255,.08);
-box-shadow:0 12px 30px rgba(0,0,0,.25);
+/* 금빛 라인 장식 */
+.gold-line{
+  position:absolute;bottom:-80px;right:-80px;
+  width:400px;height:400px;
+  background:radial-gradient(circle,rgba(212,175,55,.12) 0%,transparent 70%);
+  pointer-events:none;
 }
 
-.card h3{font-size:24px;margin-bottom:14px}
-.card p{color:#cbd5e1;font-size:17px}
-
-.pcard-link{
-display:block;
-background:#1e293b;
-border-radius:18px;
-border:1px solid rgba(255,255,255,.08);
-box-shadow:0 12px 30px rgba(0,0,0,.25);
-overflow:hidden;
-text-decoration:none;
-color:inherit;
-transition:transform .2s,border-color .2s;
-}
-.pcard-link:hover{transform:translateY(-4px);border-color:#f97316}
-.pcard-link .thumb{
-width:100%;
-aspect-ratio:9/16;
-object-fit:cover;
-display:block;
-background:#0f172a;
-}
-.pcard-link .thumb-placeholder{
-width:100%;
-aspect-ratio:9/16;
-background:linear-gradient(135deg,#1e293b,#0f172a);
-display:flex;
-align-items:center;
-justify-content:center;
-font-size:48px;
-}
-.pcard-link .pinfo{padding:20px}
-.pcard-link .pinfo h3{font-size:18px;margin-bottom:8px;color:#fff}
-.pcard-link .pinfo p{color:#94a3b8;font-size:14px;line-height:1.6}
-.pcard-link .ptag{
-display:inline-block;
-font-size:11px;
-padding:3px 10px;
-border-radius:20px;
-margin-bottom:10px;
-font-weight:700;
-}
-.ptag-video{background:rgba(249,115,22,.15);color:#f97316}
-.ptag-image{background:rgba(99,102,241,.15);color:#818cf8}
-.ptag-soon{background:rgba(255,255,255,.08);color:#64748b}
-
-.contact{
-text-align:center;
-background:#020617;
+/* ── 서비스 섹션 ── */
+.section{max-width:1200px;margin:auto;padding:100px 48px}
+.section-header{text-align:center;margin-bottom:60px}
+.section-header h2{font-size:40px;font-weight:900;margin-bottom:12px}
+.section-header p{color:rgba(255,255,255,.55);font-size:18px}
+.section-tag{
+  display:inline-block;font-size:12px;letter-spacing:2px;
+  color:#d4af37;font-weight:700;margin-bottom:16px;
 }
 
-.contact p{color:#cbd5e1;font-size:18px}
-
-.buttons{
-display:flex;
-flex-wrap:wrap;
-gap:14px;
-justify-content:center;
-margin-top:30px;
+.svc-grid{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:24px;
 }
-
-.buttons a{
-background:#334155;
-padding:14px 24px;
-border-radius:12px;
-font-weight:800;
+.svc-card{
+  background:rgba(255,255,255,.03);
+  border:1px solid rgba(212,175,55,.1);
+  border-radius:20px;padding:36px 28px;
+  transition:border-color .2s,background .2s;
 }
+.svc-card:hover{border-color:rgba(212,175,55,.4);background:rgba(212,175,55,.05)}
+.svc-card .icon{font-size:40px;margin-bottom:20px}
+.svc-card h3{font-size:22px;font-weight:800;margin-bottom:12px}
+.svc-card p{color:rgba(255,255,255,.55);font-size:15px;line-height:1.7}
 
+/* ── 포트폴리오 섹션 ── */
+.portfolio-bg{background:rgba(0,0,0,.3)}
+.port-grid{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:24px;
+}
+.port-card{
+  background:rgba(255,255,255,.03);
+  border:1px solid rgba(255,255,255,.07);
+  border-radius:20px;overflow:hidden;
+  transition:transform .2s,border-color .2s;
+  display:block;color:inherit;text-decoration:none;
+}
+.port-card:hover{transform:translateY(-6px);border-color:rgba(212,175,55,.4)}
+.port-thumb{
+  width:100%;aspect-ratio:9/16;
+  background:linear-gradient(135deg,#1a1a2e,#0f0f1e);
+  display:flex;align-items:center;justify-content:center;font-size:52px;
+}
+.port-info{padding:20px}
+.port-tag{
+  display:inline-block;font-size:11px;padding:3px 12px;
+  border-radius:20px;margin-bottom:10px;font-weight:700;
+}
+.tag-video{background:rgba(212,175,55,.12);color:#d4af37}
+.tag-soon{background:rgba(255,255,255,.06);color:rgba(255,255,255,.4)}
+.port-info h3{font-size:17px;font-weight:700;margin-bottom:6px}
+.port-info p{color:rgba(255,255,255,.5);font-size:13px;line-height:1.6}
+
+/* ── 문의 섹션 ── */
+.contact-section{
+  background:linear-gradient(135deg,rgba(212,175,55,.08),rgba(11,132,243,.05));
+  border-top:1px solid rgba(212,175,55,.1);
+  border-bottom:1px solid rgba(212,175,55,.1);
+}
+.contact-inner{
+  max-width:800px;margin:auto;padding:100px 48px;text-align:center;
+}
+.contact-inner h2{font-size:40px;font-weight:900;margin-bottom:16px}
+.contact-inner p{color:rgba(255,255,255,.6);font-size:18px;margin-bottom:40px}
+.contact-phone{
+  font-size:clamp(36px,6vw,72px);font-weight:900;
+  color:#d4af37;letter-spacing:.04em;margin-bottom:40px;
+  display:block;
+}
+.contact-btns{display:flex;justify-content:center;gap:16px;flex-wrap:wrap}
+.contact-btn{
+  display:inline-flex;align-items:center;gap:10px;
+  padding:14px 24px;border-radius:12px;
+  background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);
+  font-size:14px;font-weight:700;letter-spacing:.5px;
+  transition:background .2s,border-color .2s;
+}
+.contact-btn:hover{background:rgba(212,175,55,.12);border-color:rgba(212,175,55,.4);color:#d4af37}
+
+/* ── 푸터 ── */
 footer{
-text-align:center;
-padding:30px;
-background:#020617;
-color:#94a3b8;
+  text-align:center;padding:32px;
+  background:#05050f;color:rgba(255,255,255,.3);
+  font-size:13px;border-top:1px solid rgba(255,255,255,.06);
 }
 
-@media(max-width:600px){
-.hero h1{font-size:42px}
-.hero p{font-size:18px}
-.section h2{font-size:30px}
+/* ── 반응형 ── */
+@media(max-width:900px){
+  header{padding:14px 24px}
+  nav{display:none}
+  .hero{flex-direction:column;padding:100px 24px 60px;text-align:center}
+  .hero-left{max-width:100%}
+  .service-icons{justify-content:center}
+  .cta-group{justify-content:center}
+  .sns-bar{justify-content:center}
+  .hero-right{padding-left:0;margin-top:40px}
+  .phone-side,.phone-side2{display:none}
+  .section{padding:70px 24px}
+  .contact-inner{padding:70px 24px}
 }
 </style>
 </head>
-
 <body>
 
+<!-- 헤더 -->
+<header>
+  <div class="logo">
+    <img src="logo.png" alt="윤슬코어콘텐츠 로고">
+    <div class="logo-text">
+      <span class="eng">YUNSUL CORE CONTENTS</span>
+      <span class="kor">윤슬코어콘텐츠</span>
+    </div>
+  </div>
+  <nav>
+    <a href="#service"><span class="nav-icon">🤖</span> AI 콘텐츠 제작</a>
+    <a href="apt.html"><span class="nav-icon">▶</span> 영상·숏폼·광고</a>
+    <a href="apt.html"><span class="nav-icon">🏢</span> 부동산 마케팅</a>
+    <a href="#service"><span class="nav-icon">🖼</span> 이미지 제작</a>
+    <a href="#service"><span class="nav-icon">✨</span> 윤슬사주 콘텐츠</a>
+  </nav>
+</header>
+
+<!-- 히어로 -->
 <section class="hero">
-<div>
-<div class="eng">YUNSUL CORE CONTENTS</div>
-<h1>윤슬코어콘텐츠</h1>
-<p>AI 콘텐츠로 브랜드의 가치를 연결합니다</p>
-<a href="#service" class="btn">포트폴리오 보기</a>
-</div>
+  <div class="hero-left">
+    <div class="hero-badge">✦ AI 콘텐츠 제작 스튜디오</div>
+    <h1>AI로 만드는<br><span class="gold">분양·브랜드·숏폼</span> 콘텐츠</h1>
+    <p class="hero-sub">보는 순간 문의하게 만드는 콘텐츠를 제작합니다.</p>
+
+    <div class="service-icons">
+      <a href="#service" class="svc">
+        <div class="svc-icon">🎬</div>
+        <span>AI 영상 제작</span>
+      </a>
+      <a href="apt.html" class="svc">
+        <div class="svc-icon">🏢</div>
+        <span>부동산 마케팅</span>
+      </a>
+      <a href="#service" class="svc">
+        <div class="svc-icon">🖼</div>
+        <span>AI 이미지 제작</span>
+      </a>
+      <a href="#service" class="svc">
+        <div class="svc-icon">✨</div>
+        <span>윤슬사주 콘텐츠</span>
+      </a>
+    </div>
+
+    <div class="cta-group">
+      <a href="#portfolio" class="btn-outline">포트폴리오 보기 →</a>
+      <a href="tel:15997286" class="btn-gold">📞 문의하기 1599-7286</a>
+    </div>
+
+    <div class="sns-bar">
+      <a href="https://www.instagram.com/yunsul_core_contents" target="_blank" class="sns-item">📷 INSTAGRAM</a>
+      <div class="sns-dot"></div>
+      <a href="https://www.threads.net/@yunsul_core_contents" target="_blank" class="sns-item">🧵 THREADS</a>
+      <div class="sns-dot"></div>
+      <a href="https://open.kakao.com/o/sX9ggSAi" target="_blank" class="sns-item">💬 오픈카톡</a>
+      <div class="sns-dot"></div>
+      <a href="https://kmong.com/@윤슬코어컨텐츠" target="_blank" class="sns-item">👑 크몽</a>
+    </div>
+  </div>
+
+  <div class="hero-right">
+    <div class="phone-mockup">
+      <div class="phone phone-side2">
+        <div class="phone-screen">
+          <div class="phone-label">AI IMAGE DESIGN</div>
+          <div class="phone-title">AI 이미지 제작</div>
+          <div class="phone-desc">광고 배너·썸네일·브랜드 이미지</div>
+          <div class="phone-img">🖼</div>
+        </div>
+      </div>
+      <div class="phone phone-main">
+        <div class="phone-screen">
+          <div class="phone-label">AI VIDEO</div>
+          <div class="phone-title">Reels &amp; Shorts</div>
+          <div class="phone-desc">AI 영상 제작 | 릴스·숏폼·광고영상</div>
+          <div class="phone-img">🎬</div>
+        </div>
+      </div>
+      <div class="phone phone-side">
+        <div class="phone-screen">
+          <div class="phone-label">REAL ESTATE MARKETING</div>
+          <div class="phone-title">부동산 마케팅</div>
+          <div class="phone-desc">분양 홍보부터 상세페이지까지</div>
+          <div class="phone-img">🏢</div>
+        </div>
+      </div>
+    </div>
+    <div class="gold-line"></div>
+  </div>
 </section>
 
+<!-- 서비스 -->
 <section id="service" class="section">
-<h2>서비스</h2>
-
-<div class="grid">
-<div class="card">
-<h3>AI 영상 제작</h3>
-<p>릴스 · 숏폼 · 광고영상 · 브랜드 홍보 영상을 제작합니다.</p>
-</div>
-
-<div class="card">
-<h3>부동산 마케팅</h3>
-<p>분양 홍보 영상 · 캐러셀 · 상세 이미지 콘텐츠를 제작합니다.</p>
-</div>
-
-<div class="card">
-<h3>AI 이미지 제작</h3>
-<p>광고 배너 · 썸네일 · 프로필 이미지 · 브랜드 이미지를 제작합니다.</p>
-</div>
-
-<div class="card">
-<h3>윤슬사주</h3>
-<p>한국 전통 명리학 기반 사주 상담 콘텐츠를 운영합니다.</p>
-</div>
-</div>
+  <div class="section-header">
+    <div class="section-tag">OUR SERVICES</div>
+    <h2>제공 서비스</h2>
+    <p>AI 기술로 브랜드의 가치를 연결합니다</p>
+  </div>
+  <div class="svc-grid">
+    <div class="svc-card">
+      <div class="icon">🎬</div>
+      <h3>AI 영상 제작</h3>
+      <p>릴스 · 숏폼 · 광고영상 · 브랜드 홍보 영상을 AI로 빠르고 퀄리티 있게 제작합니다.</p>
+    </div>
+    <div class="svc-card">
+      <div class="icon">🏢</div>
+      <h3>부동산 마케팅</h3>
+      <p>분양 홍보 영상 · 캐러셀 · 상세 이미지 콘텐츠로 문의를 만들어냅니다.</p>
+    </div>
+    <div class="svc-card">
+      <div class="icon">🖼</div>
+      <h3>AI 이미지 제작</h3>
+      <p>광고 배너 · 썸네일 · 프로필 이미지 · 브랜드 이미지를 제작합니다.</p>
+    </div>
+    <div class="svc-card">
+      <div class="icon">✨</div>
+      <h3>윤슬사주 콘텐츠</h3>
+      <p>한국 전통 명리학 기반 사주 상담 콘텐츠를 운영합니다.</p>
+    </div>
+  </div>
 </section>
 
-<section class="section">
-<h2>포트폴리오</h2>
-
-<div class="grid">
-<a class="pcard-link" href="apt.html">
-<div class="thumb-placeholder">🏢</div>
-<div class="pinfo">
-<span class="ptag ptag-video">영상</span>
-<h3>아파트 분양 AI 제작</h3>
-<p>분양 홍보 릴스 · 입지 · 교통 · 생활환경 콘텐츠 제작</p>
-</div>
-</a>
-
-<div class="pcard-link" style="cursor:default">
-<div class="thumb-placeholder">🔮</div>
-<div class="pinfo">
-<span class="ptag ptag-soon">준비중</span>
-<h3>윤슬사주 콘텐츠</h3>
-<p>연애운 · 재회운 · 재물운 · 종합사주 콘텐츠 제작</p>
-</div>
-</div>
-
-<div class="pcard-link" style="cursor:default">
-<div class="thumb-placeholder">🖼️</div>
-<div class="pinfo">
-<span class="ptag ptag-soon">준비중</span>
-<h3>AI 광고 이미지</h3>
-<p>브랜드 로고 · 프로필 이미지 · 상세페이지용 이미지 제작</p>
-</div>
-</div>
-</div>
+<!-- 포트폴리오 -->
+<section id="portfolio" class="portfolio-bg">
+  <div class="section">
+    <div class="section-header">
+      <div class="section-tag">PORTFOLIO</div>
+      <h2>포트폴리오</h2>
+      <p>실제 제작한 콘텐츠를 확인해보세요</p>
+    </div>
+    <div class="port-grid">
+      <a href="apt.html" class="port-card">
+        <div class="port-thumb">🏢</div>
+        <div class="port-info">
+          <span class="port-tag tag-video">영상</span>
+          <h3>아파트 분양 AI 제작</h3>
+          <p>분양 홍보 릴스 · 입지 · 교통 · 생활환경 콘텐츠 제작</p>
+        </div>
+      </a>
+      <div class="port-card" style="cursor:default">
+        <div class="port-thumb">🔮</div>
+        <div class="port-info">
+          <span class="port-tag tag-soon">준비중</span>
+          <h3>윤슬사주 콘텐츠</h3>
+          <p>연애운 · 재회운 · 재물운 · 종합사주 콘텐츠 제작</p>
+        </div>
+      </div>
+      <div class="port-card" style="cursor:default">
+        <div class="port-thumb">🖼</div>
+        <div class="port-info">
+          <span class="port-tag tag-soon">준비중</span>
+          <h3>AI 광고 이미지</h3>
+          <p>브랜드 로고 · 프로필 이미지 · 상세페이지용 이미지 제작</p>
+        </div>
+      </div>
+    </div>
+  </div>
 </section>
 
-<section class="section contact">
-<h2>문의하기</h2>
-<p>AI 영상 제작, 분양 마케팅, 사주 콘텐츠 제작 문의를 받고 있습니다.</p>
-
-<p style="font-size:22px;font-weight:800;margin-top:20px;">📞 1599-7286</p>
-
-<div class="buttons">
-<a href="https://www.instagram.com/yunsul_core_contents" target="_blank">Instagram</a>
-<a href="https://www.threads.net/@yunsul_core_contents" target="_blank">Threads</a>
-<a href="https://kmong.com/@윤슬코어컨텐츠" target="_blank">Kmong</a>
-<a href="https://open.kakao.com/o/sX9ggSAi" target="_blank">부동산 오픈카톡</a>
-</div>
+<!-- 문의 -->
+<section class="contact-section">
+  <div class="contact-inner">
+    <div class="section-tag">CONTACT</div>
+    <h2>문의하기</h2>
+    <p>AI 영상 제작, 분양 마케팅, 사주 콘텐츠 제작 문의를 받고 있습니다.</p>
+    <a href="tel:15997286" class="contact-phone">1599-7286</a>
+    <div class="contact-btns">
+      <a href="https://www.instagram.com/yunsul_core_contents" target="_blank" class="contact-btn">📷 Instagram</a>
+      <a href="https://www.threads.net/@yunsul_core_contents" target="_blank" class="contact-btn">🧵 Threads</a>
+      <a href="https://open.kakao.com/o/sX9ggSAi" target="_blank" class="contact-btn">💬 부동산 오픈카톡</a>
+      <a href="https://kmong.com/@윤슬코어컨텐츠" target="_blank" class="contact-btn">👑 크몽</a>
+    </div>
+  </div>
 </section>
 
-<footer>
-© 2026 Yunsul Core Contents. All Rights Reserved.
-</footer>
+<footer>© 2026 Yunsul Core Contents. All Rights Reserved.</footer>
 
 </body>
 </html>
