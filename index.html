@@ -77,22 +77,21 @@ nav .nav-icon{font-size:16px}
   word-break:keep-all;
 }
 
-/* 서비스 아이콘 */
-.service-icons{
-  display:flex;gap:16px;flex-wrap:nowrap;
-  margin-bottom:44px;
-  overflow-x:auto;
-  padding-bottom:4px;
-}
-.svc{display:flex;flex-direction:column;align-items:center;gap:8px;cursor:pointer}
-.svc-icon{
-  width:56px;height:56px;border-radius:16px;
-  background:rgba(255,255,255,.06);border:1px solid rgba(212,175,55,.2);
-  display:flex;align-items:center;justify-content:center;font-size:24px;
+/* 트랙 분기 카드 */
+.fork-label{font-size:13px;color:rgba(255,255,255,.5);letter-spacing:1px;margin-bottom:12px}
+.track-fork{display:flex;flex-direction:column;gap:12px;max-width:520px;margin-bottom:44px}
+.fork-card{
+  display:flex;align-items:center;gap:16px;
+  padding:18px 20px;border-radius:16px;
+  background:rgba(255,255,255,.04);border:1px solid rgba(212,175,55,.25);
   transition:background .2s,border-color .2s;
 }
-.svc:hover .svc-icon{background:rgba(212,175,55,.12);border-color:#d4af37}
-.svc span{font-size:12px;color:rgba(255,255,255,.6);text-align:center;line-height:1.4}
+.fork-card:hover{background:rgba(212,175,55,.1);border-color:#d4af37}
+.fork-icon{font-size:28px}
+.fork-text{flex:1;display:flex;flex-direction:column;text-align:left}
+.fork-text strong{font-size:17px;font-weight:800}
+.fork-text small{font-size:13px;color:rgba(255,255,255,.55)}
+.fork-arrow{color:#d4af37;font-size:20px;font-weight:700}
 
 /* CTA 버튼 */
 .cta-group{display:flex;gap:16px;flex-wrap:wrap;margin-bottom:48px}
@@ -217,6 +216,22 @@ nav .nav-icon{font-size:16px}
 .port-info h3{font-size:17px;font-weight:700;margin-bottom:6px}
 .port-info p{color:rgba(255,255,255,.5);font-size:13px;line-height:1.6}
 
+/* ── 트랙 섹션 ── */
+.svc-grid.cols3{grid-template-columns:repeat(3,1fr)}
+.re-panel{
+  display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center;
+  background:rgba(255,255,255,.03);
+  border:1px solid rgba(212,175,55,.15);
+  border-radius:24px;padding:40px;
+}
+.re-panel img{width:100%;border-radius:16px;object-fit:cover}
+.re-panel p{color:rgba(255,255,255,.65);font-size:16px}
+.re-list{list-style:none;margin:20px 0 28px;display:flex;flex-direction:column;gap:10px}
+.re-list li{position:relative;padding-left:22px;color:rgba(255,255,255,.8);font-size:15px}
+.re-list li::before{content:'✦';position:absolute;left:0;top:2px;color:#d4af37;font-size:12px}
+.port-group{font-size:20px;font-weight:800;color:#d4af37;margin-bottom:20px}
+.port-grid + .port-group{margin-top:56px}
+
 /* ── 문의 섹션 ── */
 .contact-section{
   background:linear-gradient(135deg,rgba(212,175,55,.08),rgba(11,132,243,.05));
@@ -256,7 +271,9 @@ footer{
   nav{display:none}
   .hero{flex-direction:column;padding:100px 24px 60px;text-align:center}
   .hero-left{max-width:100%}
-  .service-icons{justify-content:center}
+  .track-fork{margin-left:auto;margin-right:auto}
+  .svc-grid.cols3{grid-template-columns:repeat(auto-fit,minmax(240px,1fr))}
+  .re-panel{grid-template-columns:1fr;gap:24px;padding:24px}
   .cta-group{justify-content:center}
   .sns-bar{justify-content:center}
   .hero-right{padding-left:0;margin-top:40px;overflow-x:auto;width:100%;justify-content:flex-start;}
@@ -281,11 +298,10 @@ footer{
     </div>
   </div>
   <nav>
-    <a href="#service"><span class="nav-icon">🤖</span> AI 콘텐츠 제작</a>
-    <a href="apt.html"><span class="nav-icon">▶</span> 영상·숏폼·광고</a>
-    <a href="apt.html"><span class="nav-icon">🏢</span> 부동산 마케팅</a>
-    <a href="#service"><span class="nav-icon">🖼</span> 이미지 제작</a>
-    <a href="#service"><span class="nav-icon">📱</span> SNS·카드뉴스 운영</a>
+    <a href="#brand"><span class="nav-icon">📱</span> 브랜드·SNS 콘텐츠</a>
+    <a href="#realestate"><span class="nav-icon">🏢</span> 부동산 마케팅</a>
+    <a href="#portfolio"><span class="nav-icon">🎬</span> 포트폴리오</a>
+    <a href="#contact"><span class="nav-icon">📞</span> 문의하기</a>
   </nav>
 </header>
 
@@ -296,22 +312,17 @@ footer{
     <h1>AI로 만드는<br><span class="gold">분양·브랜드·숏폼</span> 콘텐츠</h1>
     <p class="hero-sub">보는 순간 문의하게 만드는 콘텐츠를 제작합니다.</p>
 
-    <div class="service-icons">
-      <a href="#service" class="svc">
-        <div class="svc-icon">🎬</div>
-        <span>AI 영상 제작</span>
+    <p class="fork-label">어떤 콘텐츠가 필요하세요?</p>
+    <div class="track-fork">
+      <a href="#brand" class="fork-card">
+        <span class="fork-icon">📱</span>
+        <span class="fork-text"><strong>브랜드·SNS 콘텐츠</strong><small>SNS 운영 · 카드뉴스 · 릴스 · AI 영상 · 이미지</small></span>
+        <span class="fork-arrow">→</span>
       </a>
-      <a href="apt.html" class="svc">
-        <div class="svc-icon">🏢</div>
-        <span>부동산 마케팅</span>
-      </a>
-      <a href="#service" class="svc">
-        <div class="svc-icon">🖼</div>
-        <span>AI 이미지 제작</span>
-      </a>
-      <a href="#service" class="svc">
-        <div class="svc-icon">📱</div>
-        <span>SNS 운영대행</span>
+      <a href="#realestate" class="fork-card">
+        <span class="fork-icon">🏢</span>
+        <span class="fork-text"><strong>부동산 분양 마케팅</strong><small>분양 홍보 영상 · 캐러셀 · 상세 이미지</small></span>
+        <span class="fork-arrow">→</span>
       </a>
     </div>
 
@@ -362,29 +373,14 @@ footer{
   </div>
 </section>
 
-<!-- 서비스 -->
-<section id="service" class="section">
+<!-- 트랙 1: 브랜드·SNS 콘텐츠 -->
+<section id="brand" class="section">
   <div class="section-header">
-    <div class="section-tag">OUR SERVICES</div>
-    <h2>제공 서비스</h2>
-    <p>AI 기술로 브랜드의 가치를 연결합니다</p>
+    <div class="section-tag">TRACK 01 · BRAND &amp; SNS</div>
+    <h2>브랜드·SNS 콘텐츠</h2>
+    <p>계정 운영부터 릴스·카드뉴스까지, 피드에서 멈추게 만드는 콘텐츠</p>
   </div>
-  <div class="svc-grid">
-    <div class="svc-card">
-      <img src="svc1.png" alt="AI 영상 제작" style="width:100%;border-radius:12px;margin-bottom:20px;object-fit:cover;">
-      <h3>AI 영상 제작</h3>
-      <p>릴스 · 숏폼 · 광고영상 · 브랜드 홍보 영상을 AI로 빠르고 퀄리티 있게 제작합니다.</p>
-    </div>
-    <div class="svc-card">
-      <img src="svc2.png" alt="부동산 마케팅" style="width:100%;border-radius:12px;margin-bottom:20px;object-fit:cover;">
-      <h3>부동산 마케팅</h3>
-      <p>분양 홍보 영상 · 캐러셀 · 상세 이미지 콘텐츠로 문의를 만들어냅니다.</p>
-    </div>
-    <div class="svc-card">
-      <img src="svc3.png" alt="AI 이미지 제작" style="width:100%;border-radius:12px;margin-bottom:20px;object-fit:cover;">
-      <h3>AI 이미지 제작</h3>
-      <p>광고 배너 · 썸네일 · 프로필 이미지 · 브랜드 이미지를 제작합니다.</p>
-    </div>
+  <div class="svc-grid cols3">
     <div class="svc-card">
       <div class="icon">📱</div>
       <h3>SNS 운영대행</h3>
@@ -400,6 +396,40 @@ footer{
       <h3>원페이지 릴스 제작</h3>
       <p>보유 이미지 · 소스만으로 완성하는 15~30초 세로형 릴스. 자막과 후킹 구성까지 포함합니다.</p>
     </div>
+    <div class="svc-card">
+      <img src="svc1.png" alt="AI 영상 제작" style="width:100%;border-radius:12px;margin-bottom:20px;object-fit:cover;">
+      <h3>AI 영상 제작</h3>
+      <p>릴스 · 숏폼 · 광고영상 · 브랜드 홍보 영상을 AI로 빠르고 퀄리티 있게 제작합니다.</p>
+    </div>
+    <div class="svc-card">
+      <img src="svc3.png" alt="AI 이미지 제작" style="width:100%;border-radius:12px;margin-bottom:20px;object-fit:cover;">
+      <h3>AI 이미지 제작</h3>
+      <p>광고 배너 · 썸네일 · 프로필 이미지 · 브랜드 이미지를 제작합니다.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 트랙 2: 부동산 마케팅 -->
+<section id="realestate" class="section">
+  <div class="section-header">
+    <div class="section-tag">TRACK 02 · REAL ESTATE</div>
+    <h2>부동산 분양 마케팅</h2>
+    <p>분양 현장의 문의를 만드는 영상·이미지 콘텐츠</p>
+  </div>
+  <div class="re-panel">
+    <img src="svc2.png" alt="부동산 마케팅">
+    <div>
+      <p>분양 홍보 영상 · 캐러셀 · 상세 이미지 콘텐츠로 문의를 만들어냅니다.</p>
+      <ul class="re-list">
+        <li>분양 홍보 릴스 · 영상 제작</li>
+        <li>입지 · 교통 · 생활환경 콘텐츠</li>
+        <li>캐러셀 · 상세 이미지 콘텐츠</li>
+      </ul>
+      <div class="cta-group" style="margin-bottom:0">
+        <a href="apt.html" class="btn-gold">분양 영상 포트폴리오 →</a>
+        <a href="https://open.kakao.com/o/sX9ggSAi" target="_blank" class="btn-outline">💬 부동산 오픈카톡</a>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -411,6 +441,50 @@ footer{
       <h2>포트폴리오</h2>
       <p>실제 제작한 콘텐츠를 확인해보세요</p>
     </div>
+    <h3 class="port-group">브랜드·SNS 콘텐츠</h3>
+    <div class="port-grid">
+      <a href="#brand" class="port-card">
+        <div class="port-thumb" style="padding:0;overflow:hidden"><img src="port2.png" alt="AI 영상 제작" style="width:100%;height:100%;object-fit:cover;"></div>
+        <div class="port-info">
+          <span class="port-tag tag-video">영상</span>
+          <h3>AI 영상 제작</h3>
+          <p>릴스 · 숏폼 · 광고영상 · 브랜드 홍보 영상 제작</p>
+        </div>
+      </a>
+      <a href="#brand" class="port-card">
+        <div class="port-thumb" style="padding:0;overflow:hidden"><img src="port3.png" alt="AI 이미지 제작" style="width:100%;height:100%;object-fit:cover;"></div>
+        <div class="port-info">
+          <span class="port-tag tag-video">이미지</span>
+          <h3>AI 이미지 제작</h3>
+          <p>광고 배너 · 썸네일 · 프로필 · 상세페이지 이미지 제작</p>
+        </div>
+      </a>
+      <a href="#brand" class="port-card">
+        <div class="port-thumb">📱</div>
+        <div class="port-info">
+          <span class="port-tag tag-soon">준비중</span>
+          <h3>SNS 운영대행</h3>
+          <p>인스타그램 계정 기획 · 피드 관리 · 월간 리포트</p>
+        </div>
+      </a>
+      <a href="#brand" class="port-card">
+        <div class="port-thumb">🗂️</div>
+        <div class="port-info">
+          <span class="port-tag tag-soon">준비중</span>
+          <h3>카드뉴스 제작</h3>
+          <p>브랜드 톤앤매너에 맞춘 슬라이드형 카드뉴스</p>
+        </div>
+      </a>
+      <a href="#brand" class="port-card">
+        <div class="port-thumb">🎞️</div>
+        <div class="port-info">
+          <span class="port-tag tag-soon">준비중</span>
+          <h3>원페이지 릴스 제작</h3>
+          <p>보유 소스 기반 15~30초 세로형 릴스</p>
+        </div>
+      </a>
+    </div>
+    <h3 class="port-group">부동산 마케팅</h3>
     <div class="port-grid">
       <a href="apt.html" class="port-card">
         <div class="port-thumb" style="padding:0;overflow:hidden"><img src="port1.png" alt="부동산 마케팅" style="width:100%;height:100%;object-fit:cover;"></div>
@@ -420,52 +494,12 @@ footer{
           <p>분양 홍보 릴스 · 입지 · 교통 · 생활환경 콘텐츠 제작</p>
         </div>
       </a>
-      <a href="#service" class="port-card">
-        <div class="port-thumb" style="padding:0;overflow:hidden"><img src="port2.png" alt="AI 영상 제작" style="width:100%;height:100%;object-fit:cover;"></div>
-        <div class="port-info">
-          <span class="port-tag tag-video">영상</span>
-          <h3>AI 영상 제작</h3>
-          <p>릴스 · 숏폼 · 광고영상 · 브랜드 홍보 영상 제작</p>
-        </div>
-      </a>
-      <a href="#service" class="port-card">
-        <div class="port-thumb" style="padding:0;overflow:hidden"><img src="port3.png" alt="AI 이미지 제작" style="width:100%;height:100%;object-fit:cover;"></div>
-        <div class="port-info">
-          <span class="port-tag tag-video">이미지</span>
-          <h3>AI 이미지 제작</h3>
-          <p>광고 배너 · 썸네일 · 프로필 · 상세페이지 이미지 제작</p>
-        </div>
-      </a>
-      <a href="#service" class="port-card">
-        <div class="port-thumb">📱</div>
-        <div class="port-info">
-          <span class="port-tag tag-soon">준비중</span>
-          <h3>SNS 운영대행</h3>
-          <p>인스타그램 계정 기획 · 피드 관리 · 월간 리포트</p>
-        </div>
-      </a>
-      <a href="#service" class="port-card">
-        <div class="port-thumb">🗂️</div>
-        <div class="port-info">
-          <span class="port-tag tag-soon">준비중</span>
-          <h3>카드뉴스 제작</h3>
-          <p>브랜드 톤앤매너에 맞춘 슬라이드형 카드뉴스</p>
-        </div>
-      </a>
-      <a href="#service" class="port-card">
-        <div class="port-thumb">🎞️</div>
-        <div class="port-info">
-          <span class="port-tag tag-soon">준비중</span>
-          <h3>원페이지 릴스 제작</h3>
-          <p>보유 소스 기반 15~30초 세로형 릴스</p>
-        </div>
-      </a>
     </div>
   </div>
 </section>
 
 <!-- 문의 -->
-<section class="contact-section">
+<section id="contact" class="contact-section">
   <div class="contact-inner">
     <div class="section-tag">CONTACT</div>
     <h2>문의하기</h2>
