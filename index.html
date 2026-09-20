@@ -39,16 +39,54 @@ nav .nav-icon{font-size:16px}
   min-height:100vh;
   display:flex;align-items:center;
   padding:120px 48px 80px;
-  background:radial-gradient(ellipse at 20% 50%,rgba(212,175,55,.08) 0%,transparent 60%),
-             radial-gradient(ellipse at 80% 30%,rgba(11,132,243,.06) 0%,transparent 50%),
-             linear-gradient(135deg,#05050f 0%,#0a0a1a 60%,#0d0d20 100%);
+  background:radial-gradient(ellipse 60% 70% at 78% 50%,rgba(212,175,55,.20) 0%,transparent 65%),
+             radial-gradient(ellipse 50% 60% at 10% 15%,rgba(11,132,243,.14) 0%,transparent 60%),
+             radial-gradient(ellipse 90% 40% at 50% 115%,rgba(212,175,55,.12) 0%,transparent 70%),
+             linear-gradient(160deg,#04040c 0%,#0a0d1f 55%,#0b1226 100%);
   position:relative;overflow:hidden;
 }
 
+/* 정밀한 격자: 가장자리로 갈수록 옅어진다 */
 .hero::before{
   content:'';position:absolute;inset:0;
-  background:url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23d4af37' fill-opacity='0.03'%3E%3Ccircle cx='30' cy='30' r='1'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  background-image:linear-gradient(rgba(212,175,55,.07) 1px,transparent 1px),
+                   linear-gradient(90deg,rgba(212,175,55,.07) 1px,transparent 1px);
+  background-size:64px 64px;
+  -webkit-mask-image:radial-gradient(ellipse 70% 70% at 62% 48%,#000 0%,transparent 78%);
+  mask-image:radial-gradient(ellipse 70% 70% at 62% 48%,#000 0%,transparent 78%);
   pointer-events:none;
+}
+
+/* 윤슬: 하단에 흐르는 잔물결 */
+.hero::after{
+  content:'';position:absolute;left:0;right:0;bottom:0;height:160px;
+  background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1200' height='160' viewBox='0 0 1200 160' fill='none'%3E%3Cpath d='M0 70 Q150 20 300 70 T600 70 T900 70 T1200 70' stroke='%23d4af37' stroke-opacity='.30' stroke-width='1.2'/%3E%3Cpath d='M0 95 Q150 45 300 95 T600 95 T900 95 T1200 95' stroke='%23d4af37' stroke-opacity='.18' stroke-width='1'/%3E%3Cpath d='M0 120 Q150 70 300 120 T600 120 T900 120 T1200 120' stroke='%23d4af37' stroke-opacity='.10' stroke-width='1'/%3E%3C/svg%3E") repeat-x bottom;
+  -webkit-mask-image:linear-gradient(to top,#000 25%,transparent);
+  mask-image:linear-gradient(to top,#000 25%,transparent);
+  animation:wave-drift 70s linear infinite;
+  pointer-events:none;
+}
+@keyframes wave-drift{from{background-position-x:0}to{background-position-x:1200px}}
+
+/* 윤슬: 반짝이는 빛 */
+.hero-sparkles{position:absolute;inset:0;pointer-events:none;z-index:0}
+.hero-sparkles::before,.hero-sparkles::after{
+  content:'';position:absolute;top:0;left:-20px;border-radius:50%;
+  animation:twinkle 5s ease-in-out infinite;
+}
+.hero-sparkles::before{
+  width:3px;height:3px;background:#f0d060;
+  box-shadow:28vw 18vh 2px #f0d060,44vw 64vh 2px #f0d060,58vw 12vh 2px #f0d060,72vw 74vh 2px #f0d060,
+             86vw 22vh 2px #f0d060,94vw 58vh 2px #f0d060,36vw 82vh 2px #f0d060;
+}
+.hero-sparkles::after{
+  width:2px;height:2px;background:#fff;animation-delay:2.5s;
+  box-shadow:14vw 42vh 1px #fff,50vw 34vh 1px #fff,66vw 46vh 1px #fff,80vw 10vh 1px #fff,
+             90vw 84vh 1px #fff,22vw 72vh 1px #fff,60vw 88vh 1px #fff;
+}
+@keyframes twinkle{0%,100%{opacity:.1}50%{opacity:.85}}
+@media(prefers-reduced-motion:reduce){
+  .hero::after,.hero-sparkles::before,.hero-sparkles::after{animation:none}
 }
 
 .hero-left{flex:1;max-width:640px;position:relative;z-index:1}
@@ -307,6 +345,7 @@ footer{
 
 <!-- 히어로 -->
 <section class="hero">
+  <div class="hero-sparkles" aria-hidden="true"></div>
   <div class="hero-left">
     <div class="hero-badge">✦ AI 콘텐츠 제작 스튜디오</div>
     <h1>AI로 만드는<br><span class="gold">분양·브랜드·숏폼</span> 콘텐츠</h1>
