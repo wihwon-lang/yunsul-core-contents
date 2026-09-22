@@ -49,7 +49,8 @@ section{scroll-margin-top:48px}
 
 /* ── 히어로 ── */
 .hero{padding:calc(48px + clamp(64px,10vw,144px)) var(--pad) 0}
-.hero h1{font-size:clamp(44px,8.4vw,120px);line-height:1.02}
+.hero-top{display:flex;flex-direction:column;gap:clamp(32px,5vw,48px)}
+.hero h1{font-size:clamp(32px,4vw,64px);line-height:1.08}
 .hero-cols{
   display:grid;grid-template-columns:repeat(12,1fr);gap:var(--gap);
   margin-top:clamp(56px,8vw,120px);
@@ -57,8 +58,11 @@ section{scroll-margin-top:48px}
 .hero-sub{grid-column:1/6;font-size:24px;font-weight:300;line-height:1.35}
 .hero-desc{grid-column:6/10;color:var(--fog)}
 .hero-cta{grid-column:10/13}
-.hero-orbit{width:100%;margin-top:clamp(40px,6vw,80px);position:relative}
+.hero-orbit{width:100%;position:relative}
 .hero-orbit video{display:block;width:100%;aspect-ratio:16/9;object-fit:cover;background:var(--black)}
+@media(min-width:901px){
+  .hero-top{display:grid;grid-template-columns:1fr 2fr;gap:clamp(32px,5vw,56px);align-items:center}
+}
 .orbit-labels{position:absolute;inset:0;pointer-events:none}
 .orbit-label{
   position:absolute;left:50%;top:50%;
@@ -167,17 +171,17 @@ footer b{font-weight:400;color:var(--white)}
 
 <!-- 히어로 -->
 <section class="hero">
-  <div class="hero-copy">
+  <div class="hero-top">
   <h1 class="display">AI로 만드는<br>분양·브랜드·숏폼<br>콘텐츠</h1>
+  <div class="hero-orbit">
+    <video src="portfolio/video/orbit-hero.mp4" poster="portfolio/video/orbit-hero.jpg" autoplay muted loop playsinline preload="auto" aria-label="윤슬코어콘텐츠 서비스 궤도 애니메이션"></video>
+    <div class="orbit-labels" aria-hidden="true"></div>
+  </div>
+  </div>
   <div class="hero-cols">
     <p class="hero-sub">보는 순간 문의하게 만드는 콘텐츠를 제작합니다.</p>
     <p class="hero-desc">영상 기획·제작·광고부터 SNS 운영대행, 카드뉴스, 원페이지 릴스까지 한 팀이 맡습니다.</p>
     <div class="hero-cta"><a class="dot-link" href="tel:15997286">문의하기 1599-7286</a></div>
-  </div>
-  </div>
-  <div class="hero-orbit">
-    <video src="portfolio/video/orbit-hero.mp4" poster="portfolio/video/orbit-hero.jpg" autoplay muted loop playsinline preload="auto" aria-label="윤슬코어콘텐츠 서비스 궤도 애니메이션"></video>
-    <div class="orbit-labels" aria-hidden="true"></div>
   </div>
   <nav class="tracks" aria-label="서비스 분야">
     <a href="#brand"><strong>브랜드·SNS 콘텐츠</strong><span>SNS 운영 · 카드뉴스 · 릴스 · AI 영상 · AI 이미지</span><span aria-hidden="true">→</span></a>
