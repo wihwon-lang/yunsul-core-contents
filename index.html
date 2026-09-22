@@ -57,14 +57,8 @@ section{scroll-margin-top:48px}
 .hero-sub{grid-column:1/6;font-size:24px;font-weight:300;line-height:1.35}
 .hero-desc{grid-column:6/10;color:var(--fog)}
 .hero-cta{grid-column:10/13}
-.hero-main{display:grid;grid-template-columns:1fr;gap:clamp(32px,5vw,48px);align-items:start}
-.hero-reel{width:min(60vw,280px)}
-.hero-reel video{display:block;width:100%;aspect-ratio:9/16;object-fit:cover;background:var(--soft)}
-.hero-reel .dot-link{margin-top:var(--gap)}
-@media(min-width:1101px){
-  .hero-main{grid-template-columns:1fr auto}
-  .hero-reel{width:clamp(260px,22vw,420px)}
-}
+.hero-orbit{width:100%;margin-top:clamp(40px,6vw,80px)}
+.hero-orbit video{display:block;width:100%;aspect-ratio:16/9;object-fit:cover;background:var(--black)}
 .tracks{margin-top:clamp(56px,8vw,120px);border-top:1px solid var(--graphite)}
 .tracks a{
   display:grid;grid-template-columns:1fr 2fr auto;gap:var(--gap);align-items:baseline;
@@ -164,7 +158,6 @@ footer b{font-weight:400;color:var(--white)}
 
 <!-- 히어로 -->
 <section class="hero">
-  <div class="hero-main">
   <div class="hero-copy">
   <h1 class="display">AI로 만드는<br>분양·브랜드·숏폼<br>콘텐츠</h1>
   <div class="hero-cols">
@@ -173,10 +166,8 @@ footer b{font-weight:400;color:var(--white)}
     <div class="hero-cta"><a class="dot-link" href="tel:15997286">문의하기 1599-7286</a></div>
   </div>
   </div>
-  <div class="hero-reel">
-    <video src="portfolio/video/hero-reel.mp4" poster="portfolio/video/hero-reel.jpg" autoplay muted loop playsinline preload="auto" aria-label="윤슬코어콘텐츠 작업물 쇼릴"></video>
-    <a class="dot-link" href="portfolio.html">작업물 보기</a>
-  </div>
+  <div class="hero-orbit">
+    <video src="portfolio/video/orbit-hero.mp4" poster="portfolio/video/orbit-hero.jpg" autoplay muted loop playsinline preload="auto" aria-label="윤슬코어콘텐츠 서비스 궤도 애니메이션"></video>
   </div>
   <nav class="tracks" aria-label="서비스 분야">
     <a href="#brand"><strong>브랜드·SNS 콘텐츠</strong><span>SNS 운영 · 카드뉴스 · 릴스 · AI 영상 · AI 이미지</span><span aria-hidden="true">→</span></a>
@@ -284,7 +275,7 @@ footer b{font-weight:400;color:var(--white)}
 
 <script>
 if(matchMedia('(prefers-reduced-motion: reduce)').matches){
-  var reel=document.querySelector('.hero-reel video');
+  var reel=document.querySelector('.hero-orbit video');
   if(reel){reel.removeAttribute('autoplay');reel.pause();}
 }
 </script>
