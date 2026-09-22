@@ -57,8 +57,17 @@ section{scroll-margin-top:48px}
 .hero-sub{grid-column:1/6;font-size:24px;font-weight:300;line-height:1.35}
 .hero-desc{grid-column:6/10;color:var(--fog)}
 .hero-cta{grid-column:10/13}
-.hero-orbit{width:100%;margin-top:clamp(40px,6vw,80px)}
+.hero-orbit{width:100%;margin-top:clamp(40px,6vw,80px);position:relative}
 .hero-orbit video{display:block;width:100%;aspect-ratio:16/9;object-fit:cover;background:var(--black)}
+.orbit-labels{position:absolute;inset:0;pointer-events:none}
+.orbit-label{
+  position:absolute;left:50%;top:50%;
+  transform:translate(-50%,10px);
+  font-family:'Pretendard Variable',Pretendard,sans-serif;
+  font-weight:600;color:var(--white);white-space:nowrap;
+  font-size:clamp(12px,2.6vw,18px);letter-spacing:-0.01em;
+  text-shadow:0 1px 8px rgba(0,0,0,.85);
+}
 .tracks{margin-top:clamp(56px,8vw,120px);border-top:1px solid var(--graphite)}
 .tracks a{
   display:grid;grid-template-columns:1fr 2fr auto;gap:var(--gap);align-items:baseline;
@@ -168,6 +177,7 @@ footer b{font-weight:400;color:var(--white)}
   </div>
   <div class="hero-orbit">
     <video src="portfolio/video/orbit-hero.mp4" poster="portfolio/video/orbit-hero.jpg" autoplay muted loop playsinline preload="auto" aria-label="윤슬코어콘텐츠 서비스 궤도 애니메이션"></video>
+    <div class="orbit-labels" aria-hidden="true"></div>
   </div>
   <nav class="tracks" aria-label="서비스 분야">
     <a href="#brand"><strong>브랜드·SNS 콘텐츠</strong><span>SNS 운영 · 카드뉴스 · 릴스 · AI 영상 · AI 이미지</span><span aria-hidden="true">→</span></a>
@@ -274,10 +284,44 @@ footer b{font-weight:400;color:var(--white)}
 </footer>
 
 <script>
-if(matchMedia('(prefers-reduced-motion: reduce)').matches){
+var reduceMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
+if(reduceMotion){
   var reel=document.querySelector('.hero-orbit video');
   if(reel){reel.removeAttribute('autoplay');reel.pause();}
 }
+
+(function(){
+  var THEMES=['분양','브랜드','숏폼','릴스','이미지','상세페이지','AI모델'];
+  var video=document.querySelector('.hero-orbit video');
+  var layer=document.querySelector('.orbit-labels');
+  if(!video||!layer) return;
+  var PERIOD=12, RX=33.333, RY=24.074;
+  var spans=THEMES.map(function(t){
+    var s=document.createElement('span');
+    s.className='orbit-label';
+    s.textContent=t;
+    layer.appendChild(s);
+    return s;
+  });
+  function place(t){
+    var angleOffset=((t%PERIOD)/PERIOD)*360;
+    spans.forEach(function(s,i){
+      var angleDeg=((360/THEMES.length)*i+angleOffset)%360;
+      var rad=angleDeg*Math.PI/180;
+      var x=50+Math.cos(rad)*RX, y=50+Math.sin(rad)*RY;
+      var depth=Math.sin(rad);
+      var scale=0.85+((depth+1)/2)*0.3;
+      s.style.left=x+'%';
+      s.style.top=y+'%';
+      s.style.opacity=0.55+((depth+1)/2)*0.45;
+      s.style.zIndex=Math.round((depth+1)*500)+10;
+      s.style.transform='translate(-50%, 10px) scale('+scale+')';
+    });
+  }
+  if(reduceMotion){ place(0); return; }
+  function tick(){ place(video.currentTime||0); requestAnimationFrame(tick); }
+  requestAnimationFrame(tick);
+})();
 </script>
 
 </body>
