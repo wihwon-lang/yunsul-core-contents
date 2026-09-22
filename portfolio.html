@@ -1,4 +1,4 @@
-<!-- 윤슬코어콘텐츠 포트폴리오(AI 영상·원페이지 릴스·카드뉴스) 갤러리 페이지 -->
+<!-- 윤슬코어콘텐츠 포트폴리오: 탭으로 분야를 필터링해 보여주는 통합 작업물 갤러리 -->
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -27,7 +27,7 @@ body{
 }
 a{color:inherit;text-decoration:none}
 img{display:block;max-width:100%}
-section{scroll-margin-top:48px}
+button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
 :focus-visible{outline:1px solid var(--white);outline-offset:4px}
 
 .dot-link{display:inline-flex;align-items:center;gap:10px}
@@ -50,39 +50,49 @@ section{scroll-margin-top:48px}
 .page-head h1{font-size:clamp(44px,8.4vw,120px);line-height:1.02}
 .page-head p{margin-top:24px;color:var(--fog);max-width:46ch}
 
-/* ── 섹션 ── */
-.sec{padding:clamp(72px,10vw,120px) var(--pad) 0}
-.sec-head{display:flex;justify-content:space-between;align-items:flex-end;gap:var(--gap);margin-bottom:clamp(40px,6vw,96px)}
-.sec-head h2{font-size:clamp(40px,6vw,80px)}
-.sec-note{color:var(--fog);margin:-24px 0 clamp(40px,6vw,96px);max-width:56ch}
+/* ── 탭 필터 ── */
+.tabs{
+  display:flex;gap:clamp(20px,3vw,40px);flex-wrap:wrap;
+  margin:clamp(56px,8vw,96px) 0 0;padding:0 var(--pad);
+  border-bottom:1px solid var(--graphite);
+}
+.tab{padding:0 0 16px;font-size:18px;color:var(--fog);border-bottom:2px solid transparent;margin-bottom:-1px;transition:color .2s,border-color .2s}
+.tab:hover{color:var(--white)}
+.tab[aria-selected="true"]{color:var(--white);border-color:var(--white)}
+.tab .n{color:var(--graphite);font-size:14px;margin-left:2px}
+.tab[aria-selected="true"] .n{color:var(--fog)}
 
 /* ── 타일 그리드 ── */
-.grid{display:grid;grid-template-columns:repeat(12,1fr);gap:var(--gap);row-gap:clamp(32px,5vw,64px);align-items:start}
-.s3{grid-column:span 3}.s4{grid-column:span 4}.s9{grid-column:span 9}
+.sec{padding:clamp(48px,7vw,80px) var(--pad) 0}
+.grid{
+  display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));
+  gap:var(--gap);row-gap:clamp(32px,5vw,56px);
+}
 .tile{display:block}
-.ph{overflow:hidden;background:var(--soft)}
-.ph video{display:block;width:100%;height:100%;object-fit:contain;background:var(--black)}
-.r916{aspect-ratio:9/16}.r169{aspect-ratio:16/9}
-a.tile img{width:100%;height:auto;transition:opacity .3s}
-a.tile:hover img{opacity:.8}
+.ph{position:relative;aspect-ratio:3/4;overflow:hidden;background:var(--soft)}
+.ph img{width:100%;height:100%;object-fit:cover;transition:opacity .3s}
+.ph video{width:100%;height:100%;object-fit:contain;background:var(--black)}
+a.tile:hover .ph img{opacity:.8}
+.ph.link{display:flex;align-items:center;justify-content:center;transition:background .2s}
+.ph.link:hover{background:#1a1a1a}
+.ph-flag{
+  position:absolute;top:0;left:0;padding:6px 10px;
+  font-size:12px;letter-spacing:.04em;color:var(--white);
+  background:rgba(0,0,0,.6);
+}
 .cap{padding-top:var(--gap)}
-.cap h3{font-size:24px;font-weight:400;line-height:1.13}
-.cap p{color:var(--fog);line-height:1.4}
+.cap h3{font-size:20px;font-weight:400;line-height:1.15}
+.cap p{color:var(--fog);font-size:14px;margin-top:4px}
 
-/* ── 카드뉴스 캐러셀 ── */
-.cn-block + .cn-block{margin-top:clamp(56px,8vw,96px)}
-.cn-head{display:flex;align-items:baseline;justify-content:space-between;gap:var(--gap);flex-wrap:wrap;margin-bottom:var(--gap)}
-.cn-head h3{font-size:24px;font-weight:400;line-height:1.13}
-.cn-head span{color:var(--fog)}
-.carousel{
-  display:flex;gap:var(--gap);overflow-x:auto;
-  scroll-snap-type:x mandatory;padding-bottom:16px;
-  scrollbar-width:thin;scrollbar-color:var(--graphite) transparent;
-}
-.carousel img{
-  flex:0 0 auto;width:min(320px,72vw);aspect-ratio:4/5;object-fit:cover;
-  scroll-snap-align:start;background:var(--soft);
-}
+/* ── 라이트박스 ── */
+.lightbox{position:fixed;inset:0;z-index:200;background:rgba(0,0,0,.94);display:flex;align-items:center;justify-content:center;padding:clamp(24px,6vw,64px)}
+.lightbox[hidden]{display:none}
+.lb-close{position:absolute;top:20px;right:24px;font-size:28px;line-height:1;color:var(--white)}
+.lb-close:hover{color:var(--fog)}
+.lb-body{width:100%;height:100%;display:flex;align-items:center;justify-content:center}
+.lb-body img{max-width:100%;max-height:100%;object-fit:contain}
+.lb-carousel{display:flex;gap:var(--gap);overflow-x:auto;width:100%;height:100%;align-items:center;scroll-snap-type:x mandatory}
+.lb-carousel img{flex:0 0 auto;max-height:100%;width:auto;scroll-snap-align:center;object-fit:contain}
 
 /* ── 문의 ── */
 .contact{padding:clamp(96px,14vw,240px) var(--pad) clamp(72px,10vw,120px)}
@@ -100,9 +110,8 @@ footer b{font-weight:400;color:var(--white)}
   .bar{grid-template-columns:1fr auto}
   .bar .mid{display:none}
   .grid{grid-template-columns:repeat(2,1fr)}
-  .s3,.s9{grid-column:span 2}
-  .s4{grid-column:span 1}
-  .cap h3{font-size:20px}
+  .cap h3{font-size:18px}
+  .tabs{gap:20px}
 }
 </style>
 </head>
@@ -122,108 +131,114 @@ footer b{font-weight:400;color:var(--white)}
 
 <div class="page-head">
   <h1 class="display">포트폴리오</h1>
-  <p>AI 영상, 원페이지 릴스, 카드뉴스 작업물을 모았습니다.</p>
+  <p>분야별 작업물을 모아두었습니다. 카테고리를 선택하거나 이미지를 눌러 크게 살펴보세요.</p>
 </div>
 
-<!-- AI 영상 -->
-<section id="video" class="sec">
-  <div class="sec-head">
-    <h2 class="display">AI 영상 릴스</h2>
-    <a class="dot-link" href="apt.html">부동산 분양 영상</a>
-  </div>
-  <div class="grid">
-    <div class="tile s3">
-      <div class="ph r916"><video src="portfolio/video/forest-heritage.mp4" poster="portfolio/video/forest-heritage.jpg" controls playsinline preload="none"></video></div>
-      <div class="cap"><h3>국가산림문화자산</h3><p>연필 스케치 스타일 AI 홍보 영상</p><p>AI 영상</p></div>
+<div class="tabs" role="tablist" aria-label="포트폴리오 분야">
+  <button class="tab" role="tab" aria-selected="true" data-filter="all">전체</button>
+  <button class="tab" role="tab" aria-selected="false" data-filter="realestate">부동산</button>
+  <button class="tab" role="tab" aria-selected="false" data-filter="ai">AI 영상</button>
+  <button class="tab" role="tab" aria-selected="false" data-filter="cardnews">카드뉴스</button>
+  <button class="tab" role="tab" aria-selected="false" data-filter="onepage">원페이지 릴스</button>
+</div>
+
+<section class="sec">
+  <div class="grid" id="grid">
+
+    <!-- 부동산: 분양 영상 -->
+    <div class="tile cat-realestate">
+      <div class="ph"><video src="apt_ai_contents/안동에피트.mp4" controls playsinline preload="metadata"></video></div>
+      <div class="cap"><h3>안동 에피트</h3><p>부동산 · 영상</p></div>
     </div>
-    <div class="tile s9">
-      <div class="ph r169"><video src="portfolio/video/green-remodeling.mp4" poster="portfolio/video/green-remodeling.jpg" controls playsinline preload="none"></video></div>
-      <div class="cap"><h3>그린리모델링</h3><p>그린리모델링 홍보 영상</p><p>AI 영상</p></div>
+    <a class="tile cat-realestate" href="https://www.instagram.com/reel/DZeTUhKCZK-/" target="_blank" rel="noopener">
+      <div class="ph link dot-link">Instagram에서 보기</div>
+      <div class="cap"><h3>장유역 한라비발디</h3><p>부동산 · Instagram</p></div>
+    </a>
+    <a class="tile cat-realestate" href="https://www.instagram.com/p/DZJYtormHg6/" target="_blank" rel="noopener">
+      <div class="ph link dot-link">Instagram에서 보기</div>
+      <div class="cap"><h3>창원자이</h3><p>부동산 · Instagram</p></div>
+    </a>
+    <div class="tile cat-realestate">
+      <div class="ph"><video src="apt_ai_contents/사상더파크비스타동원유튜브.mp4" controls playsinline preload="metadata"></video></div>
+      <div class="cap"><h3>사상 더파크 비스타동원</h3><p>부동산 · 영상</p></div>
     </div>
+    <div class="tile cat-realestate">
+      <div class="ph"><video src="apt_ai_contents/온천장 하늘채 완성본.mp4" controls playsinline preload="metadata"></video></div>
+      <div class="cap"><h3>온천장 하늘채</h3><p>부동산 · 영상</p></div>
+    </div>
+    <div class="tile cat-realestate">
+      <div class="ph"><video src="portfolio/video/changwon-hanshin-thehue.mp4" poster="portfolio/video/changwon-hanshin-thehue.jpg" controls playsinline preload="none"></video></div>
+      <div class="cap"><h3>창원 한신더휴 메가시티</h3><p>부동산 · 영상</p></div>
+    </div>
+    <div class="tile cat-realestate">
+      <div class="ph"><video src="portfolio/video/hillstate-yangsan.mp4" poster="portfolio/video/hillstate-yangsan.jpg" controls playsinline preload="none"></video></div>
+      <div class="cap"><h3>힐스테이트 양산더스카이</h3><p>부동산 · 영상</p></div>
+    </div>
+
+    <!-- AI 영상 -->
+    <div class="tile cat-ai">
+      <div class="ph"><video src="portfolio/video/forest-heritage.mp4" poster="portfolio/video/forest-heritage.jpg" controls playsinline preload="none"></video></div>
+      <div class="cap"><h3>국가산림문화자산</h3><p>AI 영상</p></div>
+    </div>
+    <div class="tile cat-ai">
+      <div class="ph"><video src="portfolio/video/green-remodeling.mp4" poster="portfolio/video/green-remodeling.jpg" controls playsinline preload="none"></video></div>
+      <div class="cap"><h3>그린리모델링</h3><p>AI 영상</p></div>
+    </div>
+
+    <!-- 카드뉴스 (시리즈 · 클릭하면 전체 장 보기) -->
+    <button class="tile cat-cardnews" type="button"
+      data-lightbox="carousel"
+      data-images='["portfolio/cardnews/policy-illust/01.jpg","portfolio/cardnews/policy-illust/02.jpg","portfolio/cardnews/policy-illust/03.jpg","portfolio/cardnews/policy-illust/04.jpg","portfolio/cardnews/policy-illust/05.jpg","portfolio/cardnews/policy-illust/06.jpg","portfolio/cardnews/policy-illust/07.jpg"]'>
+      <div class="ph"><img src="portfolio/cardnews/policy-illust/01.jpg" alt="2026 부동산 정책 업데이트 일러스트 카드뉴스" loading="lazy"><span class="ph-flag">7장</span></div>
+      <div class="cap"><h3>2026 부동산 정책 업데이트</h3><p>카드뉴스 · 일러스트 디자인</p></div>
+    </button>
+    <button class="tile cat-cardnews" type="button"
+      data-lightbox="carousel"
+      data-images='["portfolio/cardnews/policy-flat/01.png","portfolio/cardnews/policy-flat/02.png","portfolio/cardnews/policy-flat/03.png","portfolio/cardnews/policy-flat/04.png","portfolio/cardnews/policy-flat/05.png","portfolio/cardnews/policy-flat/06.png","portfolio/cardnews/policy-flat/07.png"]'>
+      <div class="ph"><img src="portfolio/cardnews/policy-flat/01.png" alt="2026 부동산 정책 업데이트 플랫 카드뉴스" loading="lazy"><span class="ph-flag">7장</span></div>
+      <div class="cap"><h3>2026 부동산 정책 업데이트</h3><p>카드뉴스 · 플랫 디자인</p></div>
+    </button>
+    <button class="tile cat-cardnews" type="button"
+      data-lightbox="carousel"
+      data-images='["portfolio/cardnews/health/01.png","portfolio/cardnews/health/02.png","portfolio/cardnews/health/03.png","portfolio/cardnews/health/04.png","portfolio/cardnews/health/05.png","portfolio/cardnews/health/06.png","portfolio/cardnews/health/07.png","portfolio/cardnews/health/08.png"]'>
+      <div class="ph"><img src="portfolio/cardnews/health/01.png" alt="50대 영양 체크 카드뉴스" loading="lazy"><span class="ph-flag">8장</span></div>
+      <div class="cap"><h3>50대 영양 체크</h3><p>카드뉴스 · 헬스</p></div>
+    </button>
+
+    <!-- 원페이지 릴스 -->
+    <button class="tile cat-onepage" type="button" data-lightbox="single" data-src="portfolio/onepage/01.jpg">
+      <div class="ph"><img src="portfolio/onepage/01.jpg" alt="아파트 체크포인트 원페이지 릴스" loading="lazy"></div>
+      <div class="cap"><h3>아파트 체크포인트</h3><p>원페이지 릴스 · 부동산</p></div>
+    </button>
+    <button class="tile cat-onepage" type="button" data-lightbox="single" data-src="portfolio/onepage/02.jpg">
+      <div class="ph"><img src="portfolio/onepage/02.jpg" alt="아파트 잘 고르는 5가지 원페이지 릴스" loading="lazy"></div>
+      <div class="cap"><h3>아파트 잘 고르는 5가지</h3><p>원페이지 릴스 · 부동산</p></div>
+    </button>
+    <button class="tile cat-onepage" type="button" data-lightbox="single" data-src="portfolio/onepage/03.jpg">
+      <div class="ph"><img src="portfolio/onepage/03.jpg" alt="부동산 정책 업데이트 원페이지 릴스" loading="lazy"></div>
+      <div class="cap"><h3>부동산 정책 업데이트</h3><p>원페이지 릴스 · 부동산</p></div>
+    </button>
+    <button class="tile cat-onepage" type="button" data-lightbox="single" data-src="portfolio/onepage/04.jpg">
+      <div class="ph"><img src="portfolio/onepage/04.jpg" alt="뷰티 앰플 상품 홍보 원페이지 릴스" loading="lazy"></div>
+      <div class="cap"><h3>앰플 상품 홍보</h3><p>원페이지 릴스 · 뷰티</p></div>
+    </button>
+    <button class="tile cat-onepage" type="button" data-lightbox="single" data-src="portfolio/onepage/05.jpg">
+      <div class="ph"><img src="portfolio/onepage/05.jpg" alt="뷰티 미스트 상품 홍보 원페이지 릴스" loading="lazy"></div>
+      <div class="cap"><h3>미스트 상품 홍보</h3><p>원페이지 릴스 · 뷰티</p></div>
+    </button>
+    <button class="tile cat-onepage" type="button" data-lightbox="single" data-src="portfolio/onepage/06.jpg">
+      <div class="ph"><img src="portfolio/onepage/06.jpg" alt="패션 데님 상품 홍보 원페이지 릴스" loading="lazy"></div>
+      <div class="cap"><h3>데님 상품 홍보</h3><p>원페이지 릴스 · 패션</p></div>
+    </button>
+
   </div>
 </section>
 
-<!-- 원페이지 릴스 -->
-<section id="onepage" class="sec">
-  <div class="sec-head">
-    <h2 class="display">원페이지 릴스</h2>
-  </div>
-  <p class="sec-note">한 장으로 핵심을 전달하는 릴스용 이미지입니다. 클릭하면 크게 볼 수 있습니다.</p>
-  <div class="grid">
-    <a class="tile s4" href="portfolio/onepage/01.jpg" target="_blank" rel="noopener">
-      <img src="portfolio/onepage/01.jpg" alt="아파트 체크포인트 원페이지 릴스" width="941" height="1672" loading="lazy" decoding="async">
-      <div class="cap"><h3>아파트 체크포인트</h3><p>교통 · 학군 · 직주근접 · 대단지 · 향후 공급</p><p>부동산</p></div>
-    </a>
-    <a class="tile s4" href="portfolio/onepage/02.jpg" target="_blank" rel="noopener">
-      <img src="portfolio/onepage/02.jpg" alt="아파트 잘 고르는 5가지 원페이지 릴스" width="941" height="1672" loading="lazy" decoding="async">
-      <div class="cap"><h3>아파트 잘 고르는 5가지</h3><p>자주 놓치는 것 vs 이렇게 확인하세요</p><p>부동산</p></div>
-    </a>
-    <a class="tile s4" href="portfolio/onepage/03.jpg" target="_blank" rel="noopener">
-      <img src="portfolio/onepage/03.jpg" alt="부동산 정책 업데이트 원페이지 릴스" width="1080" height="1350" loading="lazy" decoding="async">
-      <div class="cap"><h3>부동산 정책 업데이트</h3><p>최근 바뀐 핵심 정책 요약</p><p>부동산</p></div>
-    </a>
-    <a class="tile s4" href="portfolio/onepage/04.jpg" target="_blank" rel="noopener">
-      <img src="portfolio/onepage/04.jpg" alt="뷰티 앰플 상품 홍보 원페이지 릴스" width="1080" height="1440" loading="lazy" decoding="async">
-      <div class="cap"><h3>앰플 상품 홍보</h3><p>수분 케어 콘셉트 상품 홍보 이미지</p><p>뷰티</p></div>
-    </a>
-    <a class="tile s4" href="portfolio/onepage/05.jpg" target="_blank" rel="noopener">
-      <img src="portfolio/onepage/05.jpg" alt="뷰티 미스트 상품 홍보 원페이지 릴스" width="1080" height="1440" loading="lazy" decoding="async">
-      <div class="cap"><h3>미스트 상품 홍보</h3><p>수분광 콘셉트 상품 홍보 이미지</p><p>뷰티</p></div>
-    </a>
-    <a class="tile s4" href="portfolio/onepage/06.jpg" target="_blank" rel="noopener">
-      <img src="portfolio/onepage/06.jpg" alt="패션 데님 상품 홍보 원페이지 릴스" width="1080" height="1440" loading="lazy" decoding="async">
-      <div class="cap"><h3>데님 상품 홍보</h3><p>시즌 프로모션 상품 홍보 이미지</p><p>패션</p></div>
-    </a>
-  </div>
-</section>
-
-<!-- 카드뉴스 -->
-<section id="cardnews" class="sec">
-  <div class="sec-head">
-    <h2 class="display">캐러셀 카드뉴스</h2>
-  </div>
-  <p class="sec-note">인스타그램 캐러셀 형식으로 제작한 카드뉴스입니다. 옆으로 넘겨서 확인하세요.</p>
-
-  <div class="cn-block">
-    <div class="cn-head"><h3>2026 부동산 정책 업데이트</h3><span>일러스트 디자인 · 7장</span></div>
-    <div class="carousel" tabindex="0" aria-label="부동산 정책 업데이트 카드뉴스 일러스트 디자인">
-      <img src="portfolio/cardnews/policy-illust/01.jpg" alt="부동산 정책 업데이트 1/7" loading="lazy">
-      <img src="portfolio/cardnews/policy-illust/02.jpg" alt="부동산 정책 업데이트 2/7" loading="lazy">
-      <img src="portfolio/cardnews/policy-illust/03.jpg" alt="부동산 정책 업데이트 3/7" loading="lazy">
-      <img src="portfolio/cardnews/policy-illust/04.jpg" alt="부동산 정책 업데이트 4/7" loading="lazy">
-      <img src="portfolio/cardnews/policy-illust/05.jpg" alt="부동산 정책 업데이트 5/7" loading="lazy">
-      <img src="portfolio/cardnews/policy-illust/06.jpg" alt="부동산 정책 업데이트 6/7" loading="lazy">
-      <img src="portfolio/cardnews/policy-illust/07.jpg" alt="부동산 정책 업데이트 7/7" loading="lazy">
-    </div>
-  </div>
-
-  <div class="cn-block">
-    <div class="cn-head"><h3>2026 부동산 정책 업데이트</h3><span>플랫 디자인 · 7장</span></div>
-    <div class="carousel" tabindex="0" aria-label="부동산 정책 업데이트 카드뉴스 플랫 디자인">
-      <img src="portfolio/cardnews/policy-flat/01.png" alt="부동산 정책 업데이트 1/7" loading="lazy">
-      <img src="portfolio/cardnews/policy-flat/02.png" alt="부동산 정책 업데이트 2/7" loading="lazy">
-      <img src="portfolio/cardnews/policy-flat/03.png" alt="부동산 정책 업데이트 3/7" loading="lazy">
-      <img src="portfolio/cardnews/policy-flat/04.png" alt="부동산 정책 업데이트 4/7" loading="lazy">
-      <img src="portfolio/cardnews/policy-flat/05.png" alt="부동산 정책 업데이트 5/7" loading="lazy">
-      <img src="portfolio/cardnews/policy-flat/06.png" alt="부동산 정책 업데이트 6/7" loading="lazy">
-      <img src="portfolio/cardnews/policy-flat/07.png" alt="부동산 정책 업데이트 7/7" loading="lazy">
-    </div>
-  </div>
-
-  <div class="cn-block">
-    <div class="cn-head"><h3>50대 영양 체크</h3><span>헬스 카드뉴스 · 8장</span></div>
-    <div class="carousel" tabindex="0" aria-label="50대 영양 체크 헬스 카드뉴스">
-      <img src="portfolio/cardnews/health/01.png" alt="50대 영양 체크 1/8" loading="lazy">
-      <img src="portfolio/cardnews/health/02.png" alt="50대 영양 체크 2/8" loading="lazy">
-      <img src="portfolio/cardnews/health/03.png" alt="50대 영양 체크 3/8" loading="lazy">
-      <img src="portfolio/cardnews/health/04.png" alt="50대 영양 체크 4/8" loading="lazy">
-      <img src="portfolio/cardnews/health/05.png" alt="50대 영양 체크 5/8" loading="lazy">
-      <img src="portfolio/cardnews/health/06.png" alt="50대 영양 체크 6/8" loading="lazy">
-      <img src="portfolio/cardnews/health/07.png" alt="50대 영양 체크 7/8" loading="lazy">
-      <img src="portfolio/cardnews/health/08.png" alt="50대 영양 체크 8/8" loading="lazy">
-    </div>
-  </div>
-</section>
+<!-- 라이트박스 -->
+<div class="lightbox" id="lightbox" hidden>
+  <button class="lb-close" id="lbClose" aria-label="닫기">×</button>
+  <div class="lb-body" id="lbBody"></div>
+</div>
 
 <!-- 문의 -->
 <section class="contact">
@@ -237,6 +252,63 @@ footer b{font-weight:400;color:var(--white)}
   <b>윤슬코어콘텐츠</b>
   <span>© 2026 Yunsul Core Contents. All Rights Reserved.</span>
 </footer>
+
+<script>
+(function(){
+  var tabs = document.querySelectorAll('.tab');
+  var tiles = document.querySelectorAll('#grid .tile');
+  var counts = {all: tiles.length, realestate:0, ai:0, cardnews:0, onepage:0};
+  tiles.forEach(function(t){
+    for (var k in counts) { if (k !== 'all' && t.classList.contains('cat-'+k)) counts[k]++; }
+  });
+  tabs.forEach(function(tab){
+    var f = tab.dataset.filter;
+    if (counts[f] !== undefined) {
+      var n = document.createElement('span');
+      n.className = 'n';
+      n.textContent = counts[f];
+      tab.appendChild(n);
+    }
+    tab.addEventListener('click', function(){
+      tabs.forEach(function(t){ t.setAttribute('aria-selected', t === tab ? 'true' : 'false'); });
+      tiles.forEach(function(t){
+        var show = f === 'all' || t.classList.contains('cat-' + f);
+        t.style.display = show ? '' : 'none';
+      });
+    });
+  });
+
+  var lightbox = document.getElementById('lightbox');
+  var lbBody = document.getElementById('lbBody');
+  function openLightbox(el){
+    var type = el.dataset.lightbox;
+    lbBody.innerHTML = '';
+    if (type === 'single') {
+      var img = document.createElement('img');
+      img.src = el.dataset.src;
+      img.alt = el.querySelector('h3') ? el.querySelector('h3').textContent : '';
+      lbBody.appendChild(img);
+    } else if (type === 'carousel') {
+      var wrap = document.createElement('div');
+      wrap.className = 'lb-carousel';
+      JSON.parse(el.dataset.images).forEach(function(src){
+        var img = document.createElement('img');
+        img.src = src;
+        wrap.appendChild(img);
+      });
+      lbBody.appendChild(wrap);
+    }
+    lightbox.hidden = false;
+  }
+  function closeLightbox(){ lightbox.hidden = true; lbBody.innerHTML = ''; }
+  document.querySelectorAll('[data-lightbox]').forEach(function(el){
+    el.addEventListener('click', function(e){ e.preventDefault(); openLightbox(el); });
+  });
+  document.getElementById('lbClose').addEventListener('click', closeLightbox);
+  lightbox.addEventListener('click', function(e){ if (e.target === lightbox) closeLightbox(); });
+  document.addEventListener('keydown', function(e){ if (e.key === 'Escape' && !lightbox.hidden) closeLightbox(); });
+})();
+</script>
 
 </body>
 </html>
