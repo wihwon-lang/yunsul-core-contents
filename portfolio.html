@@ -1,4 +1,4 @@
-<!-- 윤슬코어콘텐츠 포트폴리오: 탭으로 분야를 필터링해 보여주는 통합 작업물 갤러리 -->
+<!-- 윤슬코어콘텐츠 포트폴리오: 탭으로 분야를 필터링해 보여주는 통합 작업물 갤러리 (라이트 테마) -->
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -8,133 +8,135 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
 <style>
 :root{
-  --black:#000000;
-  --soft:#101010;
-  --white:#ffffff;
-  --fog:#a0a0a0;
-  --graphite:#484848;
-  --gold:#d4af37;
-  --pad:clamp(16px,4vw,48px);
-  --gap:16px;
+  --bg:#ffffff;
+  --bg-soft:#f8f8ff;
+  --ink:#111827;
+  --ink-soft:#65708a;
+  --line:#dfe3f4;
+  --grad:linear-gradient(115deg,#9144ff 0%,#4b4de8 47%,#1266e8 100%);
+  --grad-text:#1457e6;
+  --pad:clamp(20px,4vw,48px);
+  --gap:20px;
+  --radius:22px;
 }
 *{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth}
 body{
-  background:var(--black);color:var(--white);
+  background:var(--bg);color:var(--ink);
   font-family:'Pretendard Variable',Pretendard,'Apple SD Gothic Neo','Malgun Gothic',sans-serif;
-  font-weight:400;font-size:16px;line-height:1.5;letter-spacing:-.01em;
+  font-weight:400;font-size:16px;line-height:1.6;letter-spacing:-.01em;
   overflow-x:hidden;
 }
 a{color:inherit;text-decoration:none}
 img{display:block;max-width:100%}
 button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
-:focus-visible{outline:1px solid var(--white);outline-offset:4px}
+:focus-visible{outline:2px solid #1266e8;outline-offset:3px}
 
-.dot-link{display:inline-flex;align-items:center;gap:10px}
-.dot-link::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--gold);flex:none}
-.dot-link:hover{color:var(--fog)}
-.display{font-weight:300;letter-spacing:-.02em;line-height:1;word-break:keep-all}
+.eyebrow{display:inline-block;font-size:13px;font-weight:800;letter-spacing:.08em;color:#1266e8;text-transform:uppercase;margin-bottom:14px}
+.dot-link{display:inline-flex;align-items:center;gap:8px;font-weight:700;color:#1266e8}
+.dot-link:hover{opacity:.75}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:15px 26px;border-radius:12px;font-weight:700;font-size:15px;white-space:nowrap}
+.btn-grad{background:var(--grad);color:#fff}
+.btn-grad:hover{opacity:.92}
+.wrap{max-width:1180px;margin:0 auto;padding:0 var(--pad)}
 
 /* ── 상단 바 ── */
 .bar{
-  position:fixed;top:0;left:0;right:0;height:48px;z-index:50;
-  display:grid;grid-template-columns:1fr auto 1fr;align-items:center;
-  padding:0 var(--pad);background:var(--black);
+  position:fixed;top:0;left:0;right:0;height:76px;z-index:80;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 var(--pad);background:rgba(255,255,255,.92);backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--line);
 }
-.bar .mid{color:var(--fog)}
-.bar nav{justify-self:end;display:flex;gap:var(--gap)}
-.bar a:hover{color:var(--fog)}
+.bar .logo{font-weight:800;font-size:18px}
+.bar nav{display:flex;align-items:center;gap:28px}
+.bar nav a{font-size:15px;color:var(--ink-soft)}
+.bar nav a:hover{color:var(--ink)}
+@media(max-width:900px){ .bar nav{display:none} }
 
 /* ── 페이지 머리 ── */
-.page-head{padding:calc(48px + clamp(64px,10vw,144px)) var(--pad) 0}
-.page-head h1{font-size:clamp(44px,8.4vw,120px);line-height:1.02}
-.page-head p{margin-top:24px;color:var(--fog);max-width:46ch}
+.page-head{padding:calc(76px + clamp(48px,8vw,80px)) 0 0}
+.page-head h1{font-size:clamp(34px,5vw,56px);font-weight:800;letter-spacing:-.02em;line-height:1.15;word-break:keep-all}
+.page-head p{margin-top:18px;color:var(--ink-soft);font-size:17px;max-width:46ch}
 
 /* ── 탭 필터 ── */
 .tabs{
-  display:flex;gap:clamp(20px,3vw,40px);flex-wrap:wrap;
-  margin:clamp(56px,8vw,96px) 0 0;padding:0 var(--pad);
-  border-bottom:1px solid var(--graphite);
+  display:flex;gap:clamp(20px,3vw,36px);flex-wrap:wrap;
+  margin:clamp(40px,6vw,64px) 0 0;
+  border-bottom:1px solid var(--line);
 }
-.tab{padding:0 0 16px;font-size:18px;color:var(--fog);border-bottom:2px solid transparent;margin-bottom:-1px;transition:color .2s,border-color .2s}
-.tab:hover{color:var(--white)}
-.tab[aria-selected="true"]{color:var(--white);border-color:var(--white)}
-.tab .n{color:var(--graphite);font-size:14px;margin-left:2px}
-.tab[aria-selected="true"] .n{color:var(--fog)}
+.tab{padding:0 0 14px;font-size:16px;font-weight:600;color:var(--ink-soft);border-bottom:2px solid transparent;margin-bottom:-1px;transition:color .2s,border-color .2s}
+.tab:hover{color:var(--ink)}
+.tab[aria-selected="true"]{color:var(--ink);border-color:#1266e8}
+.tab .n{color:#a7b0c6;font-size:13px;margin-left:2px;font-weight:600}
+.tab[aria-selected="true"] .n{color:#1266e8}
 
 /* ── 타일 그리드 ── */
-.sec{padding:clamp(48px,7vw,80px) var(--pad) 0}
+.sec{padding:clamp(40px,6vw,64px) 0 0}
 .grid{
   display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));
-  gap:var(--gap);row-gap:clamp(32px,5vw,56px);
+  gap:var(--gap);row-gap:clamp(32px,5vw,48px);
 }
 .tile{display:block}
-.ph{position:relative;aspect-ratio:3/4;overflow:hidden;background:var(--soft)}
-.ph img{width:100%;height:100%;object-fit:cover;transition:opacity .3s}
-.ph video{width:100%;height:100%;object-fit:contain;background:var(--black)}
-a.tile:hover .ph img{opacity:.8}
+.ph{position:relative;aspect-ratio:3/4;overflow:hidden;border-radius:16px;border:1px solid var(--line);background:var(--bg-soft)}
+.ph img{width:100%;height:100%;object-fit:cover;transition:transform .3s}
+.ph video{width:100%;height:100%;object-fit:contain;background:#000}
+.tile:hover .ph img{transform:scale(1.04)}
 .ph.link{display:flex;align-items:center;justify-content:center;transition:background .2s}
-.ph.link:hover{background:#1a1a1a}
+.ph.link:hover{background:#eef1ff}
 .ph-flag{
   position:absolute;top:0;left:0;padding:6px 10px;
-  font-size:12px;letter-spacing:.04em;color:var(--white);
-  background:rgba(0,0,0,.6);
+  font-size:12px;font-weight:700;letter-spacing:.02em;color:#fff;
+  background:rgba(17,24,39,.72);border-radius:0 0 10px 0;
 }
-.cap{padding-top:var(--gap)}
-.cap h3{font-size:20px;font-weight:400;line-height:1.15}
-.cap p{color:var(--fog);font-size:14px;margin-top:4px}
+.cap{padding-top:14px}
+.cap h3{font-size:16px;font-weight:700;line-height:1.3}
+.cap p{color:var(--ink-soft);font-size:13px;margin-top:4px}
 
-/* ── 라이트박스 ── */
-.lightbox{position:fixed;inset:0;z-index:200;background:rgba(0,0,0,.94);display:flex;align-items:center;justify-content:center;padding:clamp(24px,6vw,64px)}
+/* ── 라이트박스 (다크 오버레이 유지 — 이미지 감상용) ── */
+.lightbox{position:fixed;inset:0;z-index:200;background:rgba(10,12,20,.94);display:flex;align-items:center;justify-content:center;padding:clamp(24px,6vw,64px)}
 .lightbox[hidden]{display:none}
-.lb-close{position:absolute;top:20px;right:24px;font-size:28px;line-height:1;color:var(--white)}
-.lb-close:hover{color:var(--fog)}
+.lb-close{position:absolute;top:20px;right:24px;font-size:28px;line-height:1;color:#fff}
+.lb-close:hover{opacity:.7}
 .lb-body{width:100%;height:100%;display:flex;align-items:center;justify-content:center}
-.lb-body img{max-width:100%;max-height:100%;object-fit:contain}
+.lb-body img{max-width:100%;max-height:100%;object-fit:contain;border-radius:8px}
 .lb-carousel{display:flex;gap:var(--gap);overflow-x:auto;width:100%;height:100%;align-items:center;scroll-snap-type:x mandatory}
-.lb-carousel img{flex:0 0 auto;max-height:100%;width:auto;scroll-snap-align:center;object-fit:contain}
+.lb-carousel img{flex:0 0 auto;max-height:100%;width:auto;scroll-snap-align:center;object-fit:contain;border-radius:8px}
 
-/* ── 문의 ── */
-.contact{padding:clamp(96px,14vw,240px) var(--pad) clamp(72px,10vw,120px)}
-.contact h2{font-size:clamp(40px,6vw,80px)}
-.phone{display:block;margin-top:clamp(32px,5vw,64px);font-size:clamp(48px,11vw,160px);letter-spacing:-.03em}
-.phone:hover{color:var(--fog)}
+/* ── Final CTA ── */
+.final-cta{border-radius:32px;background:var(--grad);padding:clamp(48px,8vw,88px) clamp(28px,6vw,72px);color:#fff;text-align:center}
+.final-cta h2{font-size:clamp(28px,4.2vw,44px);font-weight:800;line-height:1.3;word-break:keep-all}
+.final-cta .btn-grad{margin-top:28px;background:#fff;color:#1457e6}
+.final-cta .btn-grad:hover{opacity:.9}
 
-footer{
-  display:flex;justify-content:space-between;gap:var(--gap);flex-wrap:wrap;
-  padding:16px var(--pad);border-top:1px solid var(--graphite);color:var(--fog);
-}
-footer b{font-weight:400;color:var(--white)}
+footer{border-top:1px solid var(--line);padding:32px var(--pad);display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;color:var(--ink-soft);font-size:13px}
+footer b{color:var(--ink);font-weight:800}
 
 @media(max-width:900px){
-  .bar{grid-template-columns:1fr auto}
-  .bar .mid{display:none}
   .grid{grid-template-columns:repeat(2,1fr)}
-  .cap h3{font-size:18px}
-  .tabs{gap:20px}
 }
 </style>
 </head>
 <body id="top">
 
 <header class="bar">
-  <a href="index.html">윤슬코어콘텐츠</a>
-  <span class="mid">AI 콘텐츠 · 마케팅 스튜디오</span>
+  <a href="index.html" class="logo">윤슬코어콘텐츠</a>
   <nav>
-    <a href="index.html#brand">서비스</a>
+    <a href="index.html#services">서비스</a>
     <a href="apt.html">분양 영상</a>
-    <a href="index.html#contact">문의</a>
+    <a href="index.html#faq">FAQ</a>
   </nav>
+  <a class="btn btn-grad" href="tel:15997286">문의하기</a>
 </header>
 
 <main>
 
-<div class="page-head">
-  <h1 class="display">포트폴리오</h1>
+<div class="page-head wrap">
+  <span class="eyebrow">PORTFOLIO</span>
+  <h1>포트폴리오</h1>
   <p>분야별 작업물을 모아두었습니다. 카테고리를 선택하거나 이미지를 눌러 크게 살펴보세요.</p>
 </div>
 
-<div class="tabs" role="tablist" aria-label="포트폴리오 분야">
+<div class="tabs wrap" role="tablist" aria-label="포트폴리오 분야">
   <button class="tab" role="tab" aria-selected="true" data-filter="all">전체</button>
   <button class="tab" role="tab" aria-selected="false" data-filter="realestate">부동산</button>
   <button class="tab" role="tab" aria-selected="false" data-filter="ai">AI 영상</button>
@@ -143,7 +145,7 @@ footer b{font-weight:400;color:var(--white)}
   <button class="tab" role="tab" aria-selected="false" data-filter="onepage">원페이지 릴스</button>
 </div>
 
-<section class="sec">
+<section class="sec wrap">
   <div class="grid" id="grid">
 
     <!-- 부동산: 분양 영상 -->
@@ -268,9 +270,11 @@ footer b{font-weight:400;color:var(--white)}
 </div>
 
 <!-- 문의 -->
-<section class="contact">
-  <h2 class="display">우리 브랜드 콘텐츠가<br>필요하신가요?</h2>
-  <a class="phone display" href="tel:15997286">1599-7286</a>
+<section class="sec wrap" style="padding-bottom:clamp(56px,8vw,96px)">
+  <div class="final-cta">
+    <h2>우리 브랜드 콘텐츠가<br>필요하신가요?</h2>
+    <a class="btn btn-grad" href="tel:15997286">📞 1599-7286</a>
+  </div>
 </section>
 
 </main>
