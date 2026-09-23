@@ -78,6 +78,7 @@ button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
 .ph{position:relative;aspect-ratio:3/4;overflow:hidden;border-radius:16px;border:1px solid var(--line);background:var(--bg-soft)}
 .ph img{width:100%;height:100%;object-fit:cover;transition:transform .3s}
 .cat-aimodel .ph img{object-position:center 18%}
+.cat-detail .ph img{object-position:center top}
 .ph video{width:100%;height:100%;object-fit:contain;background:#000}
 .tile:hover .ph img{transform:scale(1.04)}
 .ph-flag{
@@ -140,6 +141,7 @@ footer b{color:var(--ink);font-weight:800}
   <button class="tab" role="tab" aria-selected="false" data-filter="aimodel">AI 모델</button>
   <button class="tab" role="tab" aria-selected="false" data-filter="cardnews">카드뉴스</button>
   <button class="tab" role="tab" aria-selected="false" data-filter="onepage">원페이지 릴스</button>
+  <button class="tab" role="tab" aria-selected="false" data-filter="detail">상세페이지</button>
 </div>
 
 <section class="sec wrap">
@@ -269,6 +271,32 @@ footer b{color:var(--ink);font-weight:800}
       <div class="cap"><h3>월급 재테크 7가지 비교</h3><p>원페이지 릴스 · 재테크</p></div>
     </button>
 
+    <!-- 상세페이지 -->
+    <button class="tile cat-detail" type="button" data-lightbox="single" data-src="portfolio/detail-page/ad-creative.jpg">
+      <div class="ph"><img src="portfolio/detail-page/ad-creative.jpg" alt="AI 광고 크리에이티브 서비스 상세페이지" loading="lazy"></div>
+      <div class="cap"><h3>AI 광고 크리에이티브 서비스</h3><p>상세페이지</p></div>
+    </button>
+    <button class="tile cat-detail" type="button" data-lightbox="single" data-src="portfolio/detail-page/dalba-toneup.jpg">
+      <div class="ph"><img src="portfolio/detail-page/dalba-toneup.jpg" alt="d'Alba 톤업 선크림 상세페이지" loading="lazy"></div>
+      <div class="cap"><h3>d'Alba 톤업 선크림</h3><p>상세페이지 · 뷰티</p></div>
+    </button>
+    <button class="tile cat-detail" type="button" data-lightbox="single" data-src="portfolio/detail-page/galaxybook6.jpg">
+      <div class="ph"><img src="portfolio/detail-page/galaxybook6.jpg" alt="삼성 갤럭시북6 프로 상세페이지" loading="lazy"></div>
+      <div class="cap"><h3>Galaxy Book6 Pro</h3><p>상세페이지 · 가전</p></div>
+    </button>
+    <button class="tile cat-detail" type="button" data-lightbox="single" data-src="portfolio/detail-page/menokin-bubble.jpg">
+      <div class="ph"><img src="portfolio/detail-page/menokin-bubble.jpg" alt="매노린 퀵 버블 마스크 상세페이지" loading="lazy"></div>
+      <div class="cap"><h3>매노린 퀵 버블 마스크</h3><p>상세페이지 · 뷰티</p></div>
+    </button>
+    <button class="tile cat-detail" type="button" data-lightbox="single" data-src="portfolio/detail-page/tekira-mascara.jpg">
+      <div class="ph"><img src="portfolio/detail-page/tekira-mascara.jpg" alt="테키라 안티그래비티 마스카라 상세페이지" loading="lazy"></div>
+      <div class="cap"><h3>테키라 안티그래비티 마스카라</h3><p>상세페이지 · 뷰티</p></div>
+    </button>
+    <button class="tile cat-detail" type="button" data-lightbox="single" data-src="portfolio/detail-page/houseofb-neckfilm.jpg">
+      <div class="ph"><img src="portfolio/detail-page/houseofb-neckfilm.jpg" alt="하우스오브비 슬리핑 넥필름 상세페이지" loading="lazy"></div>
+      <div class="cap"><h3>House of B 슬리핑 넥필름</h3><p>상세페이지 · 뷰티</p></div>
+    </button>
+
   </div>
 </section>
 
@@ -297,7 +325,7 @@ footer b{color:var(--ink);font-weight:800}
 (function(){
   var tabs = document.querySelectorAll('.tab');
   var tiles = document.querySelectorAll('#grid .tile');
-  var counts = {all: tiles.length, realestate:0, ai:0, aimodel:0, cardnews:0, onepage:0};
+  var counts = {all: tiles.length, realestate:0, ai:0, aimodel:0, cardnews:0, onepage:0, detail:0};
   tiles.forEach(function(t){
     for (var k in counts) { if (k !== 'all' && t.classList.contains('cat-'+k)) counts[k]++; }
   });
