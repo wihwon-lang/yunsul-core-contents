@@ -70,8 +70,17 @@ section{scroll-margin-top:76px}
 .hero h1{font-size:clamp(34px,5.4vw,64px);font-weight:800;line-height:1.18;letter-spacing:-.02em;word-break:keep-all}
 .hero-sub{margin-top:22px;font-size:18px;color:var(--ink-soft);max-width:46ch;word-break:keep-all}
 .hero-cta{margin-top:32px;display:flex;flex-wrap:wrap;gap:14px}
-.hero-visual{border-radius:28px;overflow:hidden;background:#05050a;border:1px solid var(--line);aspect-ratio:16/9}
+.hero-visual{position:relative;border-radius:28px;overflow:hidden;background:#05050a;border:1px solid var(--line);aspect-ratio:16/9}
 .hero-visual video{display:block;width:100%;height:100%;object-fit:cover}
+.orbit-labels{position:absolute;inset:0;pointer-events:none}
+.orbit-label{
+  position:absolute;left:50%;top:50%;
+  transform:translate(-50%,8px);
+  font-family:'Pretendard Variable',Pretendard,sans-serif;
+  font-weight:600;color:#fff;white-space:nowrap;
+  font-size:clamp(11px,1.6vw,15px);letter-spacing:-.01em;
+  text-shadow:0 1px 8px rgba(0,0,0,.85);
+}
 
 .hero-preview{margin-top:clamp(40px,6vw,64px);display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
 .hero-preview a{display:block;border-radius:16px;overflow:hidden;border:1px solid var(--line);position:relative;aspect-ratio:4/5}
@@ -219,6 +228,7 @@ footer b{color:var(--ink);font-weight:800}
     </div>
     <div class="hero-visual">
       <video src="portfolio/video/orbit-hero.mp4" poster="portfolio/video/orbit-hero.jpg" autoplay muted loop playsinline aria-label="윤슬코어콘텐츠 서비스 궤도 애니메이션"></video>
+      <div class="orbit-labels" aria-hidden="true"></div>
     </div>
   </div>
 
@@ -475,10 +485,44 @@ footer b{color:var(--ink);font-weight:800}
 <a class="btn btn-grad float-cta" href="tel:15997286">📞 문의하기</a>
 
 <script>
-if(matchMedia('(prefers-reduced-motion: reduce)').matches){
+var reduceMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
+if(reduceMotion){
   var v=document.querySelector('.hero-visual video');
   if(v){v.removeAttribute('autoplay');v.pause();}
 }
+
+(function(){
+  var THEMES=['분양','브랜드','숏폼','릴스','이미지','상세페이지','AI모델'];
+  var video=document.querySelector('.hero-visual video');
+  var layer=document.querySelector('.orbit-labels');
+  if(!video||!layer) return;
+  var PERIOD=12, RX=33.333, RY=24.074;
+  var spans=THEMES.map(function(t){
+    var s=document.createElement('span');
+    s.className='orbit-label';
+    s.textContent=t;
+    layer.appendChild(s);
+    return s;
+  });
+  function place(t){
+    var angleOffset=((t%PERIOD)/PERIOD)*360;
+    spans.forEach(function(s,i){
+      var angleDeg=((360/THEMES.length)*i+angleOffset)%360;
+      var rad=angleDeg*Math.PI/180;
+      var x=50+Math.cos(rad)*RX, y=50+Math.sin(rad)*RY;
+      var depth=Math.sin(rad);
+      var scale=0.85+((depth+1)/2)*0.3;
+      s.style.left=x+'%';
+      s.style.top=y+'%';
+      s.style.opacity=0.55+((depth+1)/2)*0.45;
+      s.style.zIndex=Math.round((depth+1)*500)+10;
+      s.style.transform='translate(-50%, 8px) scale('+scale+')';
+    });
+  }
+  if(reduceMotion){ place(0); return; }
+  function tick(){ place(video.currentTime||0); requestAnimationFrame(tick); }
+  requestAnimationFrame(tick);
+})();
 </script>
 
 </body>
