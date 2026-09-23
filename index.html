@@ -126,6 +126,18 @@ section{scroll-margin-top:76px}
 .str-card p{margin-top:12px;color:var(--ink-soft);font-size:15px;line-height:1.6}
 @media(min-width:901px){ .grid-3{grid-template-columns:repeat(3,1fr)} }
 
+/* ── Process ── */
+.process-row{display:grid;grid-template-columns:1fr;gap:32px}
+.process-step{position:relative}
+.process-num{display:inline-flex;align-items:center;justify-content:center;width:44px;height:44px;border-radius:50%;background:var(--grad);color:#fff;font-weight:800;font-size:15px;margin-bottom:16px}
+.process-step h3{font-size:17px;font-weight:800}
+.process-step p{margin-top:8px;color:var(--ink-soft);font-size:14px;line-height:1.6}
+@media(min-width:901px){
+  .process-row{grid-template-columns:repeat(5,1fr);gap:var(--gap)}
+  .process-step::after{content:'';position:absolute;top:22px;left:calc(50% + 22px);width:calc(100% - 44px);height:1px;background:var(--line)}
+  .process-step:last-child::after{display:none}
+}
+
 /* ── Work ── */
 .work-group + .work-group{margin-top:48px}
 .work-head{display:flex;align-items:baseline;justify-content:space-between;gap:12px;margin-bottom:18px}
@@ -328,6 +340,41 @@ footer b{color:var(--ink);font-weight:800}
       <span class="k">ONE TEAM</span>
       <h3>제작부터 운영까지 한 팀</h3>
       <p>영상, 이미지, 카드뉴스, SNS 운영을 여러 업체에 나누지 않고 한 팀이 일관된 톤으로 맡습니다.</p>
+    </div>
+  </div>
+</section>
+
+<!-- Process -->
+<section id="process" class="sec wrap">
+  <div class="section-head">
+    <span class="eyebrow">PROCESS</span>
+    <h2>기획부터 납품까지<br>체계적인 제작 과정으로 진행합니다.</h2>
+  </div>
+  <div class="process-row">
+    <div class="process-step">
+      <span class="process-num">01</span>
+      <h3>상담 &amp; 기획</h3>
+      <p>목표와 타깃, 톤앤매너를 파악하고 콘텐츠 방향을 설계합니다.</p>
+    </div>
+    <div class="process-step">
+      <span class="process-num">02</span>
+      <h3>소스 준비</h3>
+      <p>촬영본·브랜드 자료를 정리하고 필요한 AI 생성 소스를 준비합니다.</p>
+    </div>
+    <div class="process-step">
+      <span class="process-num">03</span>
+      <h3>AI 제작</h3>
+      <p>영상·이미지·카드뉴스를 AI 도구로 빠르고 합리적으로 제작합니다.</p>
+    </div>
+    <div class="process-step">
+      <span class="process-num">04</span>
+      <h3>검수 &amp; 수정</h3>
+      <p>피드백을 반영해 디테일을 다듬고 완성도를 높입니다.</p>
+    </div>
+    <div class="process-step">
+      <span class="process-num">05</span>
+      <h3>납품 &amp; 운영</h3>
+      <p>최종 결과물을 전달하고, 필요하면 이후 운영까지 함께합니다.</p>
     </div>
   </div>
 </section>
