@@ -1,282 +1,467 @@
-<!-- 윤슬코어콘텐츠 메인 페이지 (검정 캔버스 갤러리형 레이아웃, 골드 포인트 1색) -->
+<!-- 윤슬코어콘텐츠 메인 페이지: 라이트 톤 + 그라데이션 포인트 에이전시 레이아웃 -->
 <!DOCTYPE html>
 <html lang="ko">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>윤슬코어콘텐츠</title>
+<title>윤슬코어콘텐츠 | AI 콘텐츠 마케팅 스튜디오</title>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
 <style>
 :root{
-  --black:#000000;
-  --soft:#101010;
-  --white:#ffffff;
-  --fog:#a0a0a0;
-  --graphite:#484848;
-  --gold:#d4af37;
-  --pad:clamp(16px,4vw,48px);
-  --gap:16px;
+  --bg:#ffffff;
+  --bg-soft:#f8f8ff;
+  --ink:#111827;
+  --ink-soft:#65708a;
+  --line:#dfe3f4;
+  --grad:linear-gradient(115deg,#9144ff 0%,#4b4de8 47%,#1266e8 100%);
+  --grad-text:#1457e6;
+  --pad:clamp(20px,4vw,48px);
+  --gap:20px;
+  --radius:22px;
 }
 *{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth}
 body{
-  background:var(--black);color:var(--white);
+  background:var(--bg);color:var(--ink);
   font-family:'Pretendard Variable',Pretendard,'Apple SD Gothic Neo','Malgun Gothic',sans-serif;
-  font-weight:400;font-size:16px;line-height:1.5;letter-spacing:-.01em;
+  font-weight:400;font-size:16px;line-height:1.6;letter-spacing:-.01em;
   overflow-x:hidden;
 }
 a{color:inherit;text-decoration:none}
 img{display:block;max-width:100%}
-section{scroll-margin-top:48px}
-:focus-visible{outline:1px solid var(--white);outline-offset:4px}
+button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
+section{scroll-margin-top:76px}
+:focus-visible{outline:2px solid #1266e8;outline-offset:3px}
 
-/* 골드 점 링크: 이 사이트의 유일한 버튼 형태 */
-.dot-link{display:inline-flex;align-items:center;gap:10px}
-.dot-link::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--gold);flex:none}
-.dot-link:hover{color:var(--fog)}
+.eyebrow{display:inline-block;font-size:13px;font-weight:800;letter-spacing:.08em;color:#1266e8;text-transform:uppercase;margin-bottom:14px}
+.dot-link{display:inline-flex;align-items:center;gap:8px;font-weight:700;color:#1266e8}
+.dot-link:hover{opacity:.75}
+.grad-text{background:var(--grad);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:var(--grad-text)}
+.section-head{max-width:640px;margin:0 auto clamp(40px,6vw,64px);text-align:center}
+.section-head h2{font-size:clamp(28px,4vw,44px);font-weight:800;line-height:1.25;letter-spacing:-.02em}
+.section-head p{margin-top:16px;color:var(--ink-soft);font-size:17px}
+.wrap{max-width:1180px;margin:0 auto;padding:0 var(--pad)}
+.sec{padding:clamp(64px,9vw,120px) 0}
+.soft{background:var(--bg-soft)}
 
-.display{font-weight:300;letter-spacing:-.02em;line-height:1;word-break:keep-all}
+/* 버튼 */
+.btn{display:inline-flex;align-items:center;gap:8px;padding:15px 26px;border-radius:12px;font-weight:700;font-size:15px;white-space:nowrap}
+.btn-grad{background:var(--grad);color:#fff}
+.btn-grad:hover{opacity:.92}
+.btn-ghost{border:1.5px solid var(--line);color:var(--ink)}
+.btn-ghost:hover{border-color:#1266e8;color:#1266e8}
 
 /* ── 상단 바 ── */
 .bar{
-  position:fixed;top:0;left:0;right:0;height:48px;z-index:50;
-  display:grid;grid-template-columns:1fr auto 1fr;align-items:center;
-  padding:0 var(--pad);background:var(--black);
+  position:fixed;top:0;left:0;right:0;height:76px;z-index:80;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 var(--pad);background:rgba(255,255,255,.92);backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--line);
 }
-.bar .mid{color:var(--fog)}
-.bar nav{justify-self:end;display:flex;gap:var(--gap)}
-.bar a:hover{color:var(--fog)}
+.bar .logo{font-weight:800;font-size:18px}
+.bar nav{display:flex;align-items:center;gap:28px}
+.bar nav a{font-size:15px;color:var(--ink-soft)}
+.bar nav a:hover{color:var(--ink)}
+.bar .btn{padding:11px 20px;font-size:14px}
 
 /* ── 히어로 ── */
-.hero{padding:calc(48px + clamp(64px,10vw,144px)) var(--pad) 0}
-.hero-top{display:flex;flex-direction:column;gap:clamp(32px,5vw,48px)}
-.hero h1{font-size:clamp(32px,4vw,64px);line-height:1.08}
-.hero-cols{
-  display:grid;grid-template-columns:repeat(12,1fr);gap:var(--gap);
-  margin-top:clamp(56px,8vw,120px);
-}
-.hero-sub{grid-column:1/6;font-size:24px;font-weight:300;line-height:1.35}
-.hero-desc{grid-column:6/10;color:var(--fog)}
-.hero-cta{grid-column:10/13}
-.hero-orbit{width:100%;position:relative}
-.hero-orbit video{display:block;width:100%;aspect-ratio:16/9;object-fit:cover;background:var(--black)}
-@media(min-width:901px){
-  .hero-top{display:grid;grid-template-columns:1fr 2fr;gap:clamp(32px,5vw,56px);align-items:center}
-}
-.orbit-labels{position:absolute;inset:0;pointer-events:none}
-.orbit-label{
-  position:absolute;left:50%;top:50%;
-  transform:translate(-50%,10px);
-  font-family:'Pretendard Variable',Pretendard,sans-serif;
-  font-weight:600;color:var(--white);white-space:nowrap;
-  font-size:clamp(12px,2.6vw,18px);letter-spacing:-0.01em;
-  text-shadow:0 1px 8px rgba(0,0,0,.85);
-}
-.tracks{margin-top:clamp(56px,8vw,120px);border-top:1px solid var(--graphite)}
-.tracks a{
-  display:grid;grid-template-columns:1fr 2fr auto;gap:var(--gap);align-items:baseline;
-  padding:20px 0;border-bottom:1px solid var(--graphite);
-  transition:background .2s;
-}
-.tracks a:hover{background:var(--soft)}
-.tracks strong{font-size:24px;font-weight:400;line-height:1.13}
-.tracks span{color:var(--fog)}
+.hero{padding:calc(76px + clamp(48px,8vw,88px)) 0 clamp(56px,8vw,96px)}
+.hero-grid{display:grid;grid-template-columns:1fr;gap:clamp(40px,6vw,56px);align-items:center}
+.hero h1{font-size:clamp(34px,5.4vw,64px);font-weight:800;line-height:1.18;letter-spacing:-.02em;word-break:keep-all}
+.hero-sub{margin-top:22px;font-size:18px;color:var(--ink-soft);max-width:46ch;word-break:keep-all}
+.hero-cta{margin-top:32px;display:flex;flex-wrap:wrap;gap:14px}
+.hero-visual{border-radius:28px;overflow:hidden;background:#05050a;border:1px solid var(--line);aspect-ratio:16/9}
+.hero-visual video{display:block;width:100%;height:100%;object-fit:cover}
 
-/* ── 공통 섹션 ── */
-.sec{padding:clamp(72px,10vw,120px) var(--pad) 0}
-.sec-head{display:flex;justify-content:space-between;align-items:flex-end;gap:var(--gap);margin-bottom:clamp(40px,6vw,96px)}
-.sec-head h2{font-size:clamp(40px,6vw,80px)}
+.hero-preview{margin-top:clamp(40px,6vw,64px);display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
+.hero-preview a{display:block;border-radius:16px;overflow:hidden;border:1px solid var(--line);position:relative;aspect-ratio:4/5}
+.hero-preview img{width:100%;height:100%;object-fit:cover;transition:transform .3s}
+.hero-preview a:hover img{transform:scale(1.05)}
+.hero-preview span{position:absolute;left:0;right:0;bottom:0;padding:10px 12px;font-size:12px;font-weight:700;color:#fff;background:linear-gradient(to top,rgba(0,0,0,.65),transparent)}
 
-/* ── 포트폴리오 타일 ── */
-.grid{display:grid;grid-template-columns:repeat(12,1fr);gap:var(--gap);row-gap:clamp(32px,5vw,64px);align-items:start}
-.s3{grid-column:span 3}.s5{grid-column:span 5}.s6{grid-column:span 6}.s7{grid-column:span 7}
-.tile{display:block}
-.ph{overflow:hidden;background:var(--soft)}
-.ph img{width:100%;height:100%;object-fit:cover;object-position:top;transition:opacity .3s}
-.tile:hover .ph img{opacity:.8}
-.r65{aspect-ratio:6/5}.r45{aspect-ratio:4/5}.r32{aspect-ratio:3/2}
-.cap{padding-top:var(--gap)}
-.cap h3{font-size:24px;font-weight:400;line-height:1.13}
-.cap p{color:var(--fog);line-height:1.4}
-.panel{
-  grid-column:1/-1;min-height:clamp(320px,46vw,560px);
-  display:flex;flex-direction:column;justify-content:space-between;align-items:flex-start;
-  margin-top:clamp(40px,6vw,96px);
+.hero-stats{margin-top:clamp(40px,6vw,64px);display:grid;grid-template-columns:1fr;gap:14px}
+.stat-chip{display:flex;align-items:center;gap:14px;padding:18px 20px;border:1px solid var(--line);border-radius:16px}
+.stat-chip .dot{width:10px;height:10px;border-radius:50%;background:var(--grad);flex:none}
+.stat-chip strong{display:block;font-size:15px;font-weight:800}
+.stat-chip span{display:block;font-size:13px;color:var(--ink-soft);margin-top:2px}
+
+@media(min-width:1001px){
+  .hero-grid{grid-template-columns:1fr 1fr}
+  .hero-preview{grid-template-columns:repeat(4,1fr)}
+  .hero-stats{grid-template-columns:repeat(3,1fr)}
 }
-.panel h3{font-size:clamp(44px,10.5vw,160px);letter-spacing:-.03em;color:var(--gold)}
 
-/* ── 서비스 행 목록 ── */
-.svc{display:grid;grid-template-columns:repeat(12,1fr);gap:var(--gap);padding:clamp(72px,10vw,120px) var(--pad) 0}
-.svc-intro{grid-column:1/5}
-.svc-intro h2{font-size:clamp(40px,6vw,80px);margin-bottom:24px}
-.svc-intro p{color:var(--fog);max-width:34ch}
-.svc-intro .dot-link{margin-top:32px}
-.svc-intro .dot-link + .dot-link{display:flex;margin-top:12px}
-.rows{grid-column:5/13;border-top:1px solid var(--graphite)}
-.row{display:grid;grid-template-columns:1fr 2fr;gap:var(--gap);padding:24px 0;border-bottom:1px solid var(--graphite)}
-.row h3{font-size:24px;font-weight:400;line-height:1.13}
-.row p{color:var(--fog);line-height:1.6}
-.row a:hover{color:var(--fog)}
+/* ── About ── */
+.about{display:grid;grid-template-columns:1fr;gap:40px;align-items:start}
+.about-label{font-size:14px;font-weight:700;color:var(--ink-soft)}
+.about h3{font-size:clamp(24px,3vw,32px);font-weight:800;line-height:1.35;margin-top:10px;word-break:keep-all}
+.about p{margin-top:18px;color:var(--ink-soft);font-size:16px;max-width:52ch}
+.about .dot-link{margin-top:22px;display:inline-flex;align-items:center;gap:8px;font-weight:700;color:#1266e8}
+@media(min-width:901px){ .about{grid-template-columns:1fr 1.3fr} }
 
-/* ── 문의 ── */
-.contact{padding:clamp(96px,14vw,240px) var(--pad) clamp(72px,10vw,120px)}
-.contact h2{font-size:clamp(40px,6vw,80px)}
-.phone{display:block;margin:clamp(32px,5vw,64px) 0 clamp(56px,8vw,120px);font-size:clamp(48px,11vw,160px);letter-spacing:-.03em}
-.phone:hover{color:var(--fog)}
-.links{display:grid;grid-template-columns:repeat(4,1fr);gap:var(--gap);border-top:1px solid var(--graphite)}
-.links a{padding:20px 0}
-.links a:hover{color:var(--fog)}
+/* ── 카드 공통 ── */
+.card{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:32px}
+
+/* ── Services ── */
+.grid-2{display:grid;grid-template-columns:1fr;gap:var(--gap)}
+.svc-card h3{font-size:20px;font-weight:800}
+.svc-card p{margin-top:12px;color:var(--ink-soft);font-size:15px;line-height:1.6}
+.svc-tags{margin-top:18px;display:flex;flex-wrap:wrap;gap:8px}
+.svc-tags span{font-size:12px;font-weight:700;color:#1266e8;background:#eef1ff;padding:6px 12px;border-radius:100px}
+@media(min-width:701px){ .grid-2{grid-template-columns:repeat(2,1fr)} }
+
+/* ── Strengths ── */
+.grid-3{display:grid;grid-template-columns:1fr;gap:var(--gap)}
+.str-card .k{font-size:12px;font-weight:800;letter-spacing:.06em;color:#1266e8}
+.str-card h3{margin-top:14px;font-size:21px;font-weight:800}
+.str-card p{margin-top:12px;color:var(--ink-soft);font-size:15px;line-height:1.6}
+@media(min-width:901px){ .grid-3{grid-template-columns:repeat(3,1fr)} }
+
+/* ── Work ── */
+.work-group + .work-group{margin-top:48px}
+.work-head{display:flex;align-items:baseline;justify-content:space-between;gap:12px;margin-bottom:18px}
+.work-head h3{font-size:19px;font-weight:800}
+.work-head span{font-size:12px;font-weight:700;color:var(--ink-soft);letter-spacing:.06em}
+.work-row{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
+.work-row a{display:block;border-radius:16px;overflow:hidden;border:1px solid var(--line)}
+.work-row .ph{aspect-ratio:4/3;overflow:hidden;background:var(--bg-soft)}
+.work-row img{width:100%;height:100%;object-fit:cover;transition:transform .3s}
+.work-row a:hover img{transform:scale(1.05)}
+.work-row .cap{padding:12px 14px}
+.work-row .cap b{font-size:14px;font-weight:700}
+.work-note{margin-top:32px;text-align:center;color:var(--ink-soft);font-size:14px}
+@media(min-width:701px){ .work-row{grid-template-columns:repeat(3,1fr)} }
+
+/* ── Case Study ── */
+.case{display:grid;grid-template-columns:1fr;gap:32px;align-items:center}
+.case-visual{border-radius:var(--radius);overflow:hidden;border:1px solid var(--line);aspect-ratio:16/10}
+.case-visual img{width:100%;height:100%;object-fit:cover}
+.case-body h2{font-size:clamp(26px,3.4vw,36px);font-weight:800;line-height:1.3;word-break:keep-all}
+.case-body p{margin-top:16px;color:var(--ink-soft);font-size:16px}
+.case-list{margin-top:22px;display:flex;flex-direction:column;gap:12px}
+.case-list li{list-style:none;position:relative;padding-left:24px;font-size:15px}
+.case-list li::before{content:'';position:absolute;left:0;top:8px;width:8px;height:8px;border-radius:50%;background:var(--grad)}
+@media(min-width:901px){ .case{grid-template-columns:1fr 1fr} }
+
+/* ── Reviews (placeholder) ── */
+.review-empty{max-width:680px;margin:0 auto;text-align:center;padding:56px var(--pad);border:1px dashed var(--line);border-radius:var(--radius);background:var(--bg-soft)}
+.review-empty p{color:var(--ink-soft);font-size:16px;line-height:1.7}
+.review-empty .btn{margin-top:24px}
+
+/* ── FAQ ── */
+.faq-list{max-width:760px;margin:0 auto;display:flex;flex-direction:column;gap:12px}
+.faq-item{border:1px solid var(--line);border-radius:16px;background:#fff;overflow:hidden}
+.faq-item summary{list-style:none;cursor:pointer;padding:20px 24px;font-weight:700;font-size:16px;display:flex;justify-content:space-between;align-items:center;gap:12px}
+.faq-item summary::-webkit-details-marker{display:none}
+.faq-item summary::after{content:'+';font-size:22px;font-weight:400;color:var(--ink-soft);flex:none;transition:transform .2s}
+.faq-item[open] summary::after{transform:rotate(45deg)}
+.faq-item .a{padding:0 24px 22px;color:var(--ink-soft);font-size:15px;line-height:1.7}
+
+/* ── Process ── */
+.proc-grid{display:grid;grid-template-columns:1fr;gap:var(--gap)}
+.proc-card .n{font-size:13px;font-weight:800;color:#1266e8;letter-spacing:.06em}
+.proc-card h3{margin-top:12px;font-size:19px;font-weight:800}
+.proc-card p{margin-top:10px;color:var(--ink-soft);font-size:14px;line-height:1.6}
+@media(min-width:901px){ .proc-grid{grid-template-columns:repeat(4,1fr)} }
+
+/* ── Expected Value ── */
+.val-card{text-align:left}
+.val-card h3{font-size:18px;font-weight:800}
+.val-card p{margin-top:10px;color:var(--ink-soft);font-size:14px;line-height:1.6}
+
+/* ── Final CTA ── */
+.final-cta{border-radius:32px;background:var(--grad);padding:clamp(48px,8vw,88px) clamp(28px,6vw,72px);color:#fff;text-align:center}
+.final-cta h2{font-size:clamp(28px,4.2vw,44px);font-weight:800;line-height:1.3;word-break:keep-all}
+.final-cta p{margin-top:16px;color:rgba(255,255,255,.85);font-size:16px;max-width:52ch;margin-left:auto;margin-right:auto}
+.final-links{margin-top:32px;display:flex;flex-wrap:wrap;justify-content:center;gap:12px}
+.final-links a{padding:13px 22px;border-radius:12px;background:rgba(255,255,255,.14);font-weight:700;font-size:14px;border:1px solid rgba(255,255,255,.3)}
+.final-links a:hover{background:rgba(255,255,255,.22)}
 
 /* ── 푸터 ── */
-footer{
-  display:flex;justify-content:space-between;gap:var(--gap);flex-wrap:wrap;
-  padding:16px var(--pad);border-top:1px solid var(--graphite);color:var(--fog);
-}
-footer b{font-weight:400;color:var(--white)}
+footer{border-top:1px solid var(--line);padding:32px var(--pad);display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;color:var(--ink-soft);font-size:13px}
+footer b{color:var(--ink);font-weight:800}
 
-/* ── 반응형 ── */
-@media(max-width:900px){
-  .bar{grid-template-columns:1fr auto}
-  .bar .mid{display:none}
-  .hero-sub{grid-column:1/-1}
-  .hero-desc{grid-column:1/-1}
-  .hero-cta{grid-column:1/-1}
-  .tracks a{grid-template-columns:1fr auto;row-gap:4px}
-  .tracks span:first-of-type{grid-column:1/2;grid-row:2}
-  .tracks span:last-of-type{grid-column:2;grid-row:1}
-  .grid{grid-template-columns:repeat(2,1fr)}
-  .s3{grid-column:span 1}
-  .s5,.s6,.s7{grid-column:span 2}
-  .cap h3{font-size:20px}
-  .svc-intro,.rows{grid-column:1/-1}
-  .svc-intro{margin-bottom:40px}
-  .row{grid-template-columns:1fr}
-  .links{grid-template-columns:repeat(2,1fr)}
+/* ── 플로팅 문의 버튼 ── */
+.float-cta{position:fixed;right:20px;bottom:20px;z-index:70;box-shadow:0 12px 28px rgba(18,102,232,.35)}
+
+@media(max-width:1000px){
+  .bar nav{display:none}
 }
 </style>
 </head>
 <body id="top">
 
 <header class="bar">
-  <a href="#top">윤슬코어콘텐츠</a>
-  <span class="mid">AI 콘텐츠 · 마케팅 스튜디오</span>
+  <a href="#top" class="logo">윤슬코어콘텐츠</a>
   <nav>
-    <a href="#brand">서비스</a>
-    <a href="#portfolio">포트폴리오</a>
-    <a href="#contact">문의</a>
+    <a href="#services">서비스</a>
+    <a href="#strengths">강점</a>
+    <a href="#work">작업 사례</a>
+    <a href="#faq">FAQ</a>
+    <a href="#process">진행 방식</a>
   </nav>
+  <a class="btn btn-grad" href="tel:15997286">문의하기</a>
 </header>
 
 <main>
 
 <!-- 히어로 -->
-<section class="hero">
-  <div class="hero-top">
-  <h1 class="display">AI로 만드는<br>분양·브랜드·숏폼<br>콘텐츠</h1>
-  <div class="hero-orbit">
-    <video src="portfolio/video/orbit-hero.mp4" poster="portfolio/video/orbit-hero.jpg" autoplay muted loop playsinline preload="auto" aria-label="윤슬코어콘텐츠 서비스 궤도 애니메이션"></video>
-    <div class="orbit-labels" aria-hidden="true"></div>
+<section class="hero wrap">
+  <div class="hero-grid">
+    <div>
+      <span class="eyebrow">AI 콘텐츠 마케팅 스튜디오</span>
+      <h1>AI는 만들고<br><span class="grad-text">윤슬코어콘텐츠는<br>문의로 이어줍니다</span></h1>
+      <p class="hero-sub">분양·브랜드·숏폼 콘텐츠 기획력과 AI 제작 기술을 결합해, 보는 순간 문의하게 만드는 흐름을 만듭니다.</p>
+      <div class="hero-cta">
+        <a class="btn btn-grad" href="tel:15997286">프로젝트 문의하기 ↗</a>
+        <a class="btn btn-ghost" href="#services">서비스 살펴보기</a>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <video src="portfolio/video/orbit-hero.mp4" poster="portfolio/video/orbit-hero.jpg" autoplay muted loop playsinline aria-label="윤슬코어콘텐츠 서비스 궤도 애니메이션"></video>
+    </div>
   </div>
+
+  <div class="hero-preview">
+    <a href="portfolio.html#ai"><div class="ph"><img src="portfolio/video/forest-heritage.jpg" alt="AI 영상 제작"></div><span>AI 영상 제작</span></a>
+    <a href="portfolio.html#realestate"><div class="ph"><img src="portfolio/video/hillstate-yangsan.jpg" alt="부동산 분양 마케팅"></div><span>부동산 분양 마케팅</span></a>
+    <a href="portfolio.html#cardnews"><div class="ph"><img src="portfolio/cardnews/policy-illust/01.jpg" alt="카드뉴스 제작"></div><span>카드뉴스 제작</span></a>
+    <a href="portfolio.html#onepage"><div class="ph"><img src="portfolio/onepage/01.jpg" alt="원페이지 릴스 제작"></div><span>원페이지 릴스</span></a>
   </div>
-  <div class="hero-cols">
-    <p class="hero-sub">보는 순간 문의하게 만드는 콘텐츠를 제작합니다.</p>
-    <p class="hero-desc">영상 기획·제작·광고부터 SNS 운영대행, 카드뉴스, 원페이지 릴스까지 한 팀이 맡습니다.</p>
-    <div class="hero-cta"><a class="dot-link" href="tel:15997286">문의하기 1599-7286</a></div>
+
+  <div class="hero-stats">
+    <div class="stat-chip"><span class="dot"></span><div><strong>실전 포트폴리오</strong><span>분양·브랜드·SNS 실사례</span></div></div>
+    <div class="stat-chip"><span class="dot"></span><div><strong>AI 제작</strong><span>빠른 제작과 합리적인 단가</span></div></div>
+    <div class="stat-chip"><span class="dot"></span><div><strong>원스톱 운영</strong><span>기획부터 SNS 운영까지</span></div></div>
   </div>
-  <nav class="tracks" aria-label="서비스 분야">
-    <a href="#brand"><strong>브랜드·SNS 콘텐츠</strong><span>SNS 운영 · 카드뉴스 · 릴스 · AI 영상 · AI 이미지</span><span aria-hidden="true">→</span></a>
-    <a href="#realestate"><strong>부동산 분양 마케팅</strong><span>분양 홍보 영상 · 캐러셀 · 상세 이미지</span><span aria-hidden="true">→</span></a>
-  </nav>
 </section>
 
-<!-- 포트폴리오 -->
-<section id="portfolio" class="sec">
-  <div class="sec-head">
-    <h2 class="display">포트폴리오</h2>
-    <a class="dot-link" href="portfolio.html">전체 보기</a>
-  </div>
-  <div class="grid">
-    <a class="tile s7" href="apt.html">
-      <div class="ph r65"><img src="port1.png" alt="부동산 분양 마케팅" loading="lazy" decoding="async"></div>
-      <div class="cap"><h3>부동산 분양 마케팅</h3><p>분양 홍보 릴스 · 입지 · 교통 · 생활환경 콘텐츠</p><p>영상 · 릴스</p></div>
-    </a>
-    <a class="tile s5" href="portfolio.html#cardnews">
-      <div class="ph r45"><img src="portfolio/cardnews/policy-illust/01.jpg" alt="2026 부동산 정책 업데이트 카드뉴스" loading="lazy" decoding="async"></div>
-      <div class="cap"><h3>2026 부동산 정책 업데이트</h3><p>슬라이드형 캐러셀 카드뉴스 7장</p><p>카드뉴스</p></div>
-    </a>
-
-    <a class="tile s3" href="portfolio.html#video">
-      <div class="ph r45"><img src="portfolio/video/forest-heritage.jpg" alt="국가산림문화자산 AI 홍보 영상" loading="lazy" decoding="async"></div>
-      <div class="cap"><h3>국가산림문화자산</h3><p>연필 스케치 스타일 AI 홍보 영상</p><p>AI 영상</p></div>
-    </a>
-    <a class="tile s3" href="portfolio.html#onepage">
-      <div class="ph r45"><img src="portfolio/onepage/01.jpg" alt="아파트 체크포인트 원페이지 릴스" loading="lazy" decoding="async"></div>
-      <div class="cap"><h3>아파트 체크포인트</h3><p>교통 · 학군 · 직주근접 · 대단지 · 향후 공급</p><p>원페이지 릴스</p></div>
-    </a>
-    <a class="tile s3" href="portfolio.html#cardnews">
-      <div class="ph r45"><img src="portfolio/cardnews/health/01.png" alt="50대 영양 체크 카드뉴스" loading="lazy" decoding="async"></div>
-      <div class="cap"><h3>50대 영양 체크</h3><p>헬스 정보 카드뉴스 8장</p><p>카드뉴스</p></div>
-    </a>
-    <a class="tile s3" href="apt.html">
-      <div class="ph r45"><img src="portfolio/video/hillstate-yangsan.jpg" alt="힐스테이트 양산더스카이 분양 홍보 릴스" loading="lazy" decoding="async"></div>
-      <div class="cap"><h3>힐스테이트 양산더스카이</h3><p>분양 홍보 릴스</p><p>분양 영상</p></div>
-    </a>
-
-    <a class="tile s6" href="portfolio.html#video">
-      <div class="ph r32"><img src="port2.png" alt="AI 영상 제작" loading="lazy" decoding="async"></div>
-      <div class="cap"><h3>AI 영상 제작</h3><p>릴스 · 숏폼 · 광고영상 · 브랜드 홍보 영상</p><p>AI 영상</p></div>
-    </a>
-    <a class="tile s6" href="#brand">
-      <div class="ph r32"><img src="port3.png" alt="AI 이미지 제작" loading="lazy" decoding="async"></div>
-      <div class="cap"><h3>AI 이미지 제작</h3><p>광고 배너 · 썸네일 · 프로필 · 상세페이지 이미지</p><p>AI 이미지</p></div>
-    </a>
-
-    <div class="panel">
-      <h3 class="display">피드에서<br>멈추게.</h3>
-      <a class="dot-link" href="tel:15997286">문의하기 1599-7286</a>
+<!-- About -->
+<section id="about" class="sec wrap">
+  <div class="about">
+    <div>
+      <span class="eyebrow">ABOUT YUNSULCORE</span>
+      <h2 style="font-size:clamp(26px,3.6vw,40px);font-weight:800;line-height:1.3;word-break:keep-all">좋은 브랜드가<br>더 눈에 띄도록</h2>
+    </div>
+    <div>
+      <span class="about-label">윤슬코어콘텐츠 소개</span>
+      <h3>브랜드의 강점을 고객이 이해하는 콘텐츠로 바꿉니다.</h3>
+      <p>윤슬코어콘텐츠는 AI 영상·이미지 제작 기술과 SNS 운영, 부동산 분양 마케팅 실무 경험을 결합합니다. 분양 현장과 소상공인 브랜드가 고객에게 바로 이해되고 선택받을 수 있는 콘텐츠를 만듭니다.</p>
+      <a class="dot-link" href="#strengths">윤슬코어콘텐츠의 강점 알아보기 →</a>
     </div>
   </div>
 </section>
 
-<!-- 트랙 1: 브랜드·SNS 콘텐츠 -->
-<section id="brand" class="svc">
-  <div class="svc-intro">
-    <h2 class="display">브랜드·SNS<br>콘텐츠</h2>
-    <p>계정 운영부터 릴스·카드뉴스까지, 피드에서 멈추게 만드는 콘텐츠를 만듭니다.</p>
-  </div>
-  <div class="rows">
-    <div class="row"><h3>SNS 운영대행</h3><p>인스타그램 피드 기획부터 업로드, 해시태그 전략, 월간 성과 리포트까지 브랜드 계정을 꾸준히 관리합니다.</p></div>
-    <div class="row"><h3><a href="portfolio.html#cardnews">카드뉴스 제작</a></h3><p>정보를 한눈에 읽히게 압축한 슬라이드형 카드뉴스를 장당·세트 단위로 제작합니다.</p></div>
-    <div class="row"><h3><a href="portfolio.html#onepage">원페이지 릴스 제작</a></h3><p>보유 이미지·소스만으로 완성하는 15~30초 세로형 릴스. 자막과 후킹 구성까지 포함합니다.</p></div>
-    <div class="row"><h3><a href="portfolio.html#video">AI 영상 제작</a></h3><p>릴스·숏폼·광고영상·브랜드 홍보 영상을 AI로 빠르고 퀄리티 있게 제작합니다.</p></div>
-    <div class="row"><h3>AI 이미지 제작</h3><p>광고 배너·썸네일·프로필 이미지·브랜드 이미지를 제작합니다.</p></div>
+<!-- Services -->
+<section id="services" class="sec soft">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">SERVICES</span>
+      <h2>필요한 일을<br>하나의 성장 흐름으로</h2>
+      <p>필요한 서비스만 선택하거나, 여러 서비스를 연결해 브랜드에 맞는 운영 구조를 만들 수 있습니다.</p>
+    </div>
+    <div class="grid-2">
+      <div class="card svc-card">
+        <h3>부동산 분양 마케팅</h3>
+        <p>분양 홍보 영상, 캐러셀, 상세 이미지 콘텐츠로 문의를 만들어냅니다.</p>
+        <div class="svc-tags"><span>분양 홍보 영상</span><span>입지·생활환경 콘텐츠</span><span>캐러셀·상세 이미지</span></div>
+      </div>
+      <div class="card svc-card">
+        <h3>AI 영상 제작</h3>
+        <p>릴스·숏폼·광고영상·브랜드 홍보 영상을 AI로 빠르고 퀄리티 있게 제작합니다.</p>
+        <div class="svc-tags"><span>AI 영상</span><span>릴스·숏폼</span><span>브랜드 홍보 영상</span></div>
+      </div>
+      <div class="card svc-card">
+        <h3>브랜드·SNS 콘텐츠</h3>
+        <p>계정 운영 기획부터 카드뉴스, 원페이지 릴스 제작, 월간 성과 리포트까지 관리합니다.</p>
+        <div class="svc-tags"><span>SNS 운영</span><span>카드뉴스</span><span>원페이지 릴스</span></div>
+      </div>
+      <div class="card svc-card">
+        <h3>AI 이미지 제작</h3>
+        <p>광고 배너·썸네일·프로필·상세페이지 이미지를 제작합니다.</p>
+        <div class="svc-tags"><span>광고 배너</span><span>썸네일</span><span>상세페이지 이미지</span></div>
+      </div>
+    </div>
   </div>
 </section>
 
-<!-- 트랙 2: 부동산 분양 마케팅 -->
-<section id="realestate" class="svc">
-  <div class="svc-intro">
-    <h2 class="display">부동산 분양<br>마케팅</h2>
-    <p>분양 현장의 문의를 만드는 영상·이미지 콘텐츠를 제작합니다.</p>
-    <a class="dot-link" href="apt.html">분양 영상 포트폴리오</a>
-    <a class="dot-link" href="https://open.kakao.com/o/sX9ggSAi" target="_blank" rel="noopener">부동산 오픈카톡</a>
+<!-- Strengths -->
+<section id="strengths" class="sec wrap">
+  <div class="section-head">
+    <span class="eyebrow">WHY YUNSULCORE</span>
+    <h2>도구보다 중요한 것은<br>무엇을, 왜 만드는지 아는 것입니다.</h2>
   </div>
-  <div class="rows">
-    <div class="row"><h3>분양 홍보 영상</h3><p>분양 홍보 릴스와 영상을 현장별로 기획·제작합니다.</p></div>
-    <div class="row"><h3>입지·생활환경 콘텐츠</h3><p>입지 · 교통 · 생활환경을 한눈에 보이도록 정리한 콘텐츠를 제작합니다.</p></div>
-    <div class="row"><h3>캐러셀·상세 이미지</h3><p>캐러셀과 상세 이미지 콘텐츠로 문의를 만들어냅니다.</p></div>
+  <div class="grid-3">
+    <div class="card str-card">
+      <span class="k">PORTFOLIO PROVEN</span>
+      <h3>실제 사례로 증명하는 실력</h3>
+      <p>분양 현장과 브랜드 SNS 계정에서 직접 만든 영상·이미지·카드뉴스 포트폴리오를 바로 확인할 수 있습니다.</p>
+    </div>
+    <div class="card str-card">
+      <span class="k">AI PRODUCTION</span>
+      <h3>속도와 합리적인 단가</h3>
+      <p>AI를 제작 도구로 활용해 빠르게, 합리적인 비용으로 완성도 있는 콘텐츠를 만듭니다.</p>
+    </div>
+    <div class="card str-card">
+      <span class="k">ONE TEAM</span>
+      <h3>제작부터 운영까지 한 팀</h3>
+      <p>영상, 이미지, 카드뉴스, SNS 운영을 여러 업체에 나누지 않고 한 팀이 일관된 톤으로 맡습니다.</p>
+    </div>
   </div>
 </section>
 
-<!-- 문의 -->
-<section id="contact" class="contact">
-  <h2 class="display">문의하기</h2>
-  <a class="phone display" href="tel:15997286">1599-7286</a>
-  <div class="links">
-    <a href="https://www.instagram.com/yunsul_core_contents" target="_blank" rel="noopener">Instagram</a>
-    <a href="https://www.threads.net/@yunsul_core_contents" target="_blank" rel="noopener">Threads</a>
-    <a href="https://open.kakao.com/o/sX9ggSAi" target="_blank" rel="noopener">부동산 오픈카톡</a>
-    <a href="https://kmong.com/@윤슬코어컨텐츠" target="_blank" rel="noopener">크몽</a>
+<!-- Work -->
+<section id="work" class="sec soft">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">SELECTED WORK</span>
+      <h2>윤슬코어콘텐츠가<br>만드는 결과물</h2>
+      <p>브랜드의 목표와 채널에 맞춰 전략과 비주얼을 함께 설계합니다.</p>
+    </div>
+
+    <div class="work-group">
+      <div class="work-head"><h3>AI 영상 제작</h3><span>AI VIDEO</span></div>
+      <div class="work-row">
+        <a href="portfolio.html#ai"><div class="ph"><img src="portfolio/video/forest-heritage.jpg" alt="국가산림문화자산 AI 홍보 영상"></div><div class="cap"><b>국가산림문화자산</b></div></a>
+        <a href="portfolio.html#ai"><div class="ph"><img src="portfolio/video/green-remodeling.jpg" alt="그린리모델링 AI 홍보 영상"></div><div class="cap"><b>그린리모델링</b></div></a>
+        <a href="portfolio.html#realestate"><div class="ph"><img src="portfolio/video/changwon-hanshin-thehue.jpg" alt="창원 한신더휴 메가시티 분양 영상"></div><div class="cap"><b>창원 한신더휴 메가시티</b></div></a>
+      </div>
+    </div>
+
+    <div class="work-group">
+      <div class="work-head"><h3>부동산 분양 마케팅</h3><span>REAL ESTATE</span></div>
+      <div class="work-row">
+        <a href="portfolio.html#realestate"><div class="ph"><img src="portfolio/video/hillstate-yangsan.jpg" alt="힐스테이트 양산더스카이 분양 영상"></div><div class="cap"><b>힐스테이트 양산더스카이</b></div></a>
+        <a href="portfolio.html#onepage"><div class="ph"><img src="portfolio/onepage/01.jpg" alt="아파트 체크포인트 원페이지 릴스"></div><div class="cap"><b>아파트 체크포인트</b></div></a>
+        <a href="portfolio.html#onepage"><div class="ph"><img src="portfolio/onepage/03.jpg" alt="부동산 정책 업데이트 원페이지 릴스"></div><div class="cap"><b>부동산 정책 업데이트</b></div></a>
+      </div>
+    </div>
+
+    <div class="work-group">
+      <div class="work-head"><h3>카드뉴스</h3><span>CARD NEWS</span></div>
+      <div class="work-row">
+        <a href="portfolio.html#cardnews"><div class="ph"><img src="portfolio/cardnews/policy-illust/01.jpg" alt="부동산 정책 업데이트 일러스트 카드뉴스"></div><div class="cap"><b>부동산 정책 업데이트</b></div></a>
+        <a href="portfolio.html#cardnews"><div class="ph"><img src="portfolio/cardnews/policy-flat/01.png" alt="부동산 정책 업데이트 플랫 카드뉴스"></div><div class="cap"><b>부동산 정책 업데이트</b></div></a>
+        <a href="portfolio.html#cardnews"><div class="ph"><img src="portfolio/cardnews/health/01.png" alt="50대 영양 체크 카드뉴스"></div><div class="cap"><b>50대 영양 체크</b></div></a>
+      </div>
+    </div>
+
+    <div class="work-group">
+      <div class="work-head"><h3>원페이지 릴스</h3><span>ONE-PAGE REELS</span></div>
+      <div class="work-row">
+        <a href="portfolio.html#onepage"><div class="ph"><img src="portfolio/onepage/02.jpg" alt="아파트 잘 고르는 5가지 원페이지 릴스"></div><div class="cap"><b>아파트 잘 고르는 5가지</b></div></a>
+        <a href="portfolio.html#onepage"><div class="ph"><img src="portfolio/onepage/04.jpg" alt="뷰티 앰플 상품 홍보 원페이지 릴스"></div><div class="cap"><b>앰플 상품 홍보</b></div></a>
+        <a href="portfolio.html#onepage"><div class="ph"><img src="portfolio/onepage/06.jpg" alt="패션 데님 상품 홍보 원페이지 릴스"></div><div class="cap"><b>데님 상품 홍보</b></div></a>
+      </div>
+    </div>
+
+    <p class="work-note">이미지를 클릭하면 포트폴리오 전체 목록으로 이동합니다. <a class="dot-link" href="portfolio.html">포트폴리오 전체 보기</a></p>
+  </div>
+</section>
+
+<!-- Case Study -->
+<section id="case-study" class="sec wrap">
+  <div class="case">
+    <div class="case-visual"><img src="portfolio/video/changwon-hanshin-thehue.jpg" alt="분양 현장 온라인 홍보 지원 사례"></div>
+    <div class="case-body">
+      <span class="eyebrow">STRATEGY CASE</span>
+      <h2>분양 현장<br>온라인 홍보 지원</h2>
+      <p>오프라인 견본주택 방문만으로는 부족했던 인지도를, 릴스와 홍보 영상으로 넓혀 온라인에서도 문의가 이어지도록 설계했습니다.</p>
+      <ul class="case-list">
+        <li>지역 인지도를 SNS 릴스 조회수·문의로 연결</li>
+        <li>단지별 핵심 소구점(입지·교통·생활환경)을 짧은 영상으로 정리</li>
+        <li>견본주택 방문 전부터 관심을 만드는 홍보 흐름 설계</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- Reviews -->
+<section id="reviews" class="sec soft">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">CLIENT REVIEWS</span>
+      <h2>함께한 분들의 이야기,<br>곧 이 자리에 채워드릴게요</h2>
+    </div>
+    <div class="review-empty">
+      <p>아직 공개된 후기는 없지만, 지금 진행 중인 프로젝트들의 결과가 곧 이 자리를 채울 예정입니다.<br>가장 먼저 함께해 주시는 분의 이야기를 소중히 담겠습니다.</p>
+      <a class="btn btn-grad" href="tel:15997286">첫 프로젝트 문의하기</a>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section id="faq" class="sec wrap">
+  <div class="section-head">
+    <span class="eyebrow">FREQUENTLY ASKED QUESTIONS</span>
+    <h2>자주 묻는 질문</h2>
+  </div>
+  <div class="faq-list">
+    <details class="faq-item">
+      <summary>어떤 서비스가 저에게 맞을까요?</summary>
+      <div class="a">분양 홍보가 필요하시면 부동산 분양 마케팅을, 꾸준한 SNS 운영이 필요하시면 브랜드·SNS 콘텐츠를 추천드립니다. 문의 주시면 상황에 맞게 안내해드립니다.</div>
+    </details>
+    <details class="faq-item">
+      <summary>작업을 시작하려면 어떤 자료가 필요한가요?</summary>
+      <div class="a">분양 현장 사진이나 도면, 브랜드 로고와 참고 이미지, 사용하실 채널(인스타그램·블로그 등)을 알려주시면 바로 기획을 시작할 수 있습니다.</div>
+    </details>
+    <details class="faq-item">
+      <summary>제작 기간은 얼마나 걸리나요?</summary>
+      <div class="a">콘텐츠 유형과 분량에 따라 다릅니다. 문의 시 프로젝트에 맞는 예상 일정을 안내해드립니다.</div>
+    </details>
+    <details class="faq-item">
+      <summary>완성된 콘텐츠를 광고·상업적 용도로 써도 되나요?</summary>
+      <div class="a">협의된 목적 범위에서 자유롭게 사용하실 수 있습니다. 다만 제공해주신 로고, 인물 사진 등 외부 자료의 저작권은 의뢰인께 있습니다.</div>
+    </details>
+    <details class="faq-item">
+      <summary>수정은 몇 번까지 가능한가요?</summary>
+      <div class="a">기본 수정은 프로젝트 범위 내에서 진행되며, 세부 수정 범위와 횟수는 상담 시 안내해드립니다.</div>
+    </details>
+  </div>
+</section>
+
+<!-- Process -->
+<section id="process" class="sec soft">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">PROCESS</span>
+      <h2>이해하고, 설계하고,<br>만들고, 개선합니다.</h2>
+    </div>
+    <div class="proc-grid">
+      <div class="card proc-card"><span class="n">STEP 01</span><h3>브랜드·현장 이해</h3><p>목표, 고객, 분양 현장 또는 상품과 현재 채널, 해결해야 할 문제를 함께 정리합니다.</p></div>
+      <div class="card proc-card"><span class="n">STEP 02</span><h3>전략·기획</h3><p>우선순위를 정하고 메시지, 콘텐츠, 제작 범위와 실행 일정을 설계합니다.</p></div>
+      <div class="card proc-card"><span class="n">STEP 03</span><h3>제작·운영</h3><p>AI와 실사 소스를 활용해 콘텐츠를 제작하고 채널에 맞게 운영합니다.</p></div>
+      <div class="card proc-card"><span class="n">STEP 04</span><h3>검토·개선</h3><p>반응과 문의 흐름을 확인해 다음 콘텐츠와 방향에 반영합니다.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- Expected Value -->
+<section class="sec wrap">
+  <div class="section-head">
+    <span class="eyebrow">EXPECTED VALUE</span>
+    <h2>콘텐츠 제작을 넘어<br>지속 가능한 성장 기반으로</h2>
+    <p>윤슬코어콘텐츠는 채널 활동량보다 브랜드에 남는 변화와 문의 전환을 중요하게 생각합니다.</p>
+  </div>
+  <div class="grid-3">
+    <div class="card val-card"><h3>콘텐츠 생산성 향상</h3><p>기획과 제작 시간을 줄이고 더 꾸준하게 고객과 만납니다.</p></div>
+    <div class="card val-card"><h3>운영 비용 효율화</h3><p>여러 업무를 한 팀에 맡겨 추가 인력 부담 없이 운영합니다.</p></div>
+    <div class="card val-card"><h3>데이터 기반 개선</h3><p>고객 반응을 다음 콘텐츠와 마케팅 실행에 지속적으로 반영합니다.</p></div>
+  </div>
+</section>
+
+<!-- Final CTA -->
+<section class="sec wrap">
+  <div class="final-cta">
+    <h2>브랜드의 다음 성장을<br>윤슬코어콘텐츠와 함께 설계해 보세요.</h2>
+    <p>필요한 서비스와 현재 고민을 알려주시면 브랜드 상황에 맞는 방향부터 함께 정리해 드립니다.</p>
+    <div class="final-links">
+      <a href="tel:15997286">📞 1599-7286</a>
+      <a href="https://open.kakao.com/o/sX9ggSAi" target="_blank" rel="noopener">💬 부동산 오픈카톡</a>
+      <a href="https://www.instagram.com/yunsul_core_contents" target="_blank" rel="noopener">Instagram</a>
+      <a href="https://www.threads.net/@yunsul_core_contents" target="_blank" rel="noopener">Threads</a>
+      <a href="https://kmong.com/@윤슬코어컨텐츠" target="_blank" rel="noopener">크몽</a>
+    </div>
   </div>
 </section>
 
@@ -287,45 +472,13 @@ footer b{font-weight:400;color:var(--white)}
   <span>© 2026 Yunsul Core Contents. All Rights Reserved.</span>
 </footer>
 
-<script>
-var reduceMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
-if(reduceMotion){
-  var reel=document.querySelector('.hero-orbit video');
-  if(reel){reel.removeAttribute('autoplay');reel.pause();}
-}
+<a class="btn btn-grad float-cta" href="tel:15997286">📞 문의하기</a>
 
-(function(){
-  var THEMES=['분양','브랜드','숏폼','릴스','이미지','상세페이지','AI모델'];
-  var video=document.querySelector('.hero-orbit video');
-  var layer=document.querySelector('.orbit-labels');
-  if(!video||!layer) return;
-  var PERIOD=12, RX=33.333, RY=24.074;
-  var spans=THEMES.map(function(t){
-    var s=document.createElement('span');
-    s.className='orbit-label';
-    s.textContent=t;
-    layer.appendChild(s);
-    return s;
-  });
-  function place(t){
-    var angleOffset=((t%PERIOD)/PERIOD)*360;
-    spans.forEach(function(s,i){
-      var angleDeg=((360/THEMES.length)*i+angleOffset)%360;
-      var rad=angleDeg*Math.PI/180;
-      var x=50+Math.cos(rad)*RX, y=50+Math.sin(rad)*RY;
-      var depth=Math.sin(rad);
-      var scale=0.85+((depth+1)/2)*0.3;
-      s.style.left=x+'%';
-      s.style.top=y+'%';
-      s.style.opacity=0.55+((depth+1)/2)*0.45;
-      s.style.zIndex=Math.round((depth+1)*500)+10;
-      s.style.transform='translate(-50%, 10px) scale('+scale+')';
-    });
-  }
-  if(reduceMotion){ place(0); return; }
-  function tick(){ place(video.currentTime||0); requestAnimationFrame(tick); }
-  requestAnimationFrame(tick);
-})();
+<script>
+if(matchMedia('(prefers-reduced-motion: reduce)').matches){
+  var v=document.querySelector('.hero-visual video');
+  if(v){v.removeAttribute('autoplay');v.pause();}
+}
 </script>
 
 </body>

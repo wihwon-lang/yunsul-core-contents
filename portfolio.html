@@ -278,6 +278,11 @@ footer b{font-weight:400;color:var(--white)}
     });
   });
 
+  var hashFilter = location.hash.replace('#','');
+  var hashTab = null;
+  tabs.forEach(function(t){ if (t.dataset.filter === hashFilter) hashTab = t; });
+  if (hashTab) hashTab.click();
+
   var lightbox = document.getElementById('lightbox');
   var lbBody = document.getElementById('lbBody');
   function openLightbox(el){
