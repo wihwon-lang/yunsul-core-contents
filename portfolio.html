@@ -138,6 +138,7 @@ footer b{font-weight:400;color:var(--white)}
   <button class="tab" role="tab" aria-selected="true" data-filter="all">전체</button>
   <button class="tab" role="tab" aria-selected="false" data-filter="realestate">부동산</button>
   <button class="tab" role="tab" aria-selected="false" data-filter="ai">AI 영상</button>
+  <button class="tab" role="tab" aria-selected="false" data-filter="aimodel">AI 모델</button>
   <button class="tab" role="tab" aria-selected="false" data-filter="cardnews">카드뉴스</button>
   <button class="tab" role="tab" aria-selected="false" data-filter="onepage">원페이지 릴스</button>
 </div>
@@ -184,6 +185,32 @@ footer b{font-weight:400;color:var(--white)}
       <div class="ph"><video src="portfolio/video/green-remodeling.mp4" poster="portfolio/video/green-remodeling.jpg" controls playsinline preload="none"></video></div>
       <div class="cap"><h3>그린리모델링</h3><p>AI 영상</p></div>
     </div>
+    <div class="tile cat-ai">
+      <div class="ph"><video src="portfolio/video/dalba-toneup-cream.mp4" poster="portfolio/video/dalba-toneup-cream.jpg" controls playsinline preload="none"></video></div>
+      <div class="cap"><h3>d'Alba UV 에센스 톤업크림</h3><p>AI 영상 · 뷰티</p></div>
+    </div>
+    <div class="tile cat-ai">
+      <div class="ph"><video src="portfolio/video/medicube-pink-serum.mp4" poster="portfolio/video/medicube-pink-serum.jpg" controls playsinline preload="none"></video></div>
+      <div class="cap"><h3>medicube 핑크 펩타이드 세럼</h3><p>AI 영상 · 뷰티</p></div>
+    </div>
+
+    <!-- AI 모델 이미지 -->
+    <button class="tile cat-aimodel" type="button" data-lightbox="single" data-src="portfolio/ai-model/sheet.jpg">
+      <div class="ph"><img src="portfolio/ai-model/sheet.jpg" alt="다양한 매력의 AI 모델 포트폴리오 시트" loading="lazy"><span class="ph-flag">7종</span></div>
+      <div class="cap"><h3>다양한 매력의 AI 모델</h3><p>AI 모델 이미지</p></div>
+    </button>
+    <button class="tile cat-aimodel" type="button" data-lightbox="single" data-src="portfolio/ai-model/01.jpg">
+      <div class="ph"><img src="portfolio/ai-model/01.jpg" alt="청순형 AI 모델 이미지" loading="lazy"></div>
+      <div class="cap"><h3>청순형 모델</h3><p>AI 모델 이미지</p></div>
+    </button>
+    <button class="tile cat-aimodel" type="button" data-lightbox="single" data-src="portfolio/ai-model/03.jpg">
+      <div class="ph"><img src="portfolio/ai-model/03.jpg" alt="캐주얼 라이프스타일 AI 모델 이미지" loading="lazy"></div>
+      <div class="cap"><h3>캐주얼 라이프스타일</h3><p>AI 모델 이미지</p></div>
+    </button>
+    <button class="tile cat-aimodel" type="button" data-lightbox="single" data-src="portfolio/ai-model/04.jpg">
+      <div class="ph"><img src="portfolio/ai-model/04.jpg" alt="뷰티 제품 홍보 AI 모델 이미지" loading="lazy"></div>
+      <div class="cap"><h3>뷰티 제품 홍보</h3><p>AI 모델 이미지</p></div>
+    </button>
 
     <!-- 카드뉴스 (시리즈 · 클릭하면 전체 장 보기) -->
     <button class="tile cat-cardnews" type="button"
@@ -257,7 +284,7 @@ footer b{font-weight:400;color:var(--white)}
 (function(){
   var tabs = document.querySelectorAll('.tab');
   var tiles = document.querySelectorAll('#grid .tile');
-  var counts = {all: tiles.length, realestate:0, ai:0, cardnews:0, onepage:0};
+  var counts = {all: tiles.length, realestate:0, ai:0, aimodel:0, cardnews:0, onepage:0};
   tiles.forEach(function(t){
     for (var k in counts) { if (k !== 'all' && t.classList.contains('cat-'+k)) counts[k]++; }
   });
