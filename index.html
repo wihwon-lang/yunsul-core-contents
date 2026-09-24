@@ -157,9 +157,7 @@ section{scroll-margin-top:76px}
 @media(min-width:701px){ .work-row{grid-template-columns:repeat(3,1fr)} }
 
 /* ── Halo Reel (Case Study) ── */
-.halo-layout{display:flex;flex-direction:column;gap:28px;align-items:center;position:relative}
-.halo-head{order:-1;text-align:center;max-width:520px}
-.halo-head h2{margin-top:14px;font-size:clamp(26px,3.4vw,36px);font-weight:800;line-height:1.3;word-break:keep-all}
+.halo-layout{position:relative}
 .halo-wrap{width:100%}
 .halo{position:relative;height:340px;overflow:hidden;touch-action:pan-y;cursor:grab;user-select:none}
 .halo:active{cursor:grabbing}
@@ -167,10 +165,10 @@ section{scroll-margin-top:76px}
 .halo-card img{width:100%;height:100%;object-fit:cover;display:block;pointer-events:none;user-select:none}
 .halo-cap{position:absolute;left:0;right:0;bottom:0;padding:20px 10px 8px;background:linear-gradient(0deg,rgba(0,0,0,.68),transparent);color:#fff;font-size:11px;font-weight:700;opacity:0;transition:opacity .3s;text-align:center}
 .halo-card.is-front .halo-cap{opacity:1}
+.halo-note{display:none;color:var(--ink-soft);font-size:16px;line-height:1.7}
 @media(min-width:701px){ .halo{height:440px} }
 @media(min-width:901px){
-  .halo-layout{display:block}
-  .halo-head{position:absolute;top:50%;transform:translateY(-50%);text-align:left;max-width:320px}
+  .halo-note{display:block;position:absolute;top:50%;transform:translateY(-50%);max-width:260px}
 }
 
 /* ── Reviews (placeholder) ── */
@@ -455,14 +453,15 @@ footer b{color:var(--ink);font-weight:800}
 
 <!-- Case Study -->
 <section id="case-study" class="sec wrap">
+  <div class="section-head">
+    <span class="eyebrow">REPRESENTATIVE WORK</span>
+    <h2>완성한 작품을<br>하나씩 둘러보세요</h2>
+  </div>
   <div class="halo-layout">
     <div class="halo-wrap">
       <div class="halo" id="haloReel" aria-roledescription="carousel" aria-label="대표 포트폴리오"></div>
     </div>
-    <div class="halo-head">
-      <span class="eyebrow">REPRESENTATIVE WORK</span>
-      <h2>완성한 작품을<br>하나씩 둘러보세요</h2>
-    </div>
+    <p class="halo-note">레퍼런스가 아닌,<br>저희가 직접 제작한 결과물입니다.</p>
   </div>
 </section>
 
@@ -606,7 +605,7 @@ if(reduceMotion){
 
 (function(){
   var stage=document.getElementById('haloReel');
-  var headEl=document.querySelector('.halo-head');
+  var headEl=document.querySelector('.halo-note');
   if(!stage) return;
   var items=[
     {src:'portfolio/video/hillstate-yangsan.jpg', alt:'힐스테이트 양산더스카이 분양 영상', title:'힐스테이트 양산더스카이'},
