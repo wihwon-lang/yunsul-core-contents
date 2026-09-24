@@ -168,7 +168,7 @@ section{scroll-margin-top:76px}
 .halo-note{display:none;color:var(--ink-soft);font-size:16px;line-height:1.7}
 @media(min-width:701px){ .halo{height:440px} }
 @media(min-width:901px){
-  .halo-note{display:block;position:absolute;top:50%;transform:translateY(-50%);max-width:260px}
+  .halo-note{display:block;position:absolute;top:50%;transform:translateY(-50%);max-width:320px;font-size:21px;line-height:1.55;font-weight:500}
 }
 
 /* ── Reviews (placeholder) ── */
@@ -641,8 +641,17 @@ if(reduceMotion){
     return el;
   });
 
+  var NOTE_GAP=90;
+  var layoutEl=document.querySelector('.halo-layout');
+
   function measure(){
-    var w=stage.clientWidth, h=stage.clientHeight;
+    var isDesktop=window.matchMedia('(min-width:901px)').matches;
+    var w, h;
+    if(isDesktop){
+      w=760; h=440; // fixed reference so the ring's own box can be sized to its visible content, not the fluid container
+    } else {
+      w=stage.parentElement.clientWidth; h=stage.clientHeight;
+    }
     radiusX=w*radiusXRatio; radiusY=h*radiusYRatio;
     fit=Math.max(0.5, Math.min(1, Math.min(w/(radiusX+cardW/2), h/(2*radiusY+cardH))));
     var w2=cardW*fit, h2=cardH*fit;
@@ -651,12 +660,21 @@ if(reduceMotion){
       el.style.left=(centerXRatio*100)+'%';
       el.style.marginLeft=(-w2/2)+'px'; el.style.marginTop=(-h2/2)+'px';
     });
-    if(headEl){
-      if(window.matchMedia('(min-width:901px)').matches){
-        headEl.style.left=(centerXRatio*w+radiusX+w2/2+72)+'px';
-      } else {
-        headEl.style.left='';
+
+    var contentEdge=centerXRatio*w+radiusX+w2/2;
+    if(isDesktop){
+      stage.style.width=contentEdge+'px';
+      if(headEl){
+        headEl.style.left=(contentEdge+NOTE_GAP)+'px';
+        var noteWidth=headEl.offsetWidth;
+        layoutEl.style.width=(contentEdge+NOTE_GAP+noteWidth)+'px';
+        layoutEl.style.margin='0 auto';
       }
+    } else {
+      stage.style.width='';
+      if(headEl) headEl.style.left='';
+      layoutEl.style.width='';
+      layoutEl.style.margin='';
     }
   }
 
