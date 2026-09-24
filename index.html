@@ -157,7 +157,10 @@ section{scroll-margin-top:76px}
 @media(min-width:701px){ .work-row{grid-template-columns:repeat(3,1fr)} }
 
 /* ── Halo Reel (Case Study) ── */
-.halo-wrap{max-width:1100px;margin:0 auto}
+.halo-layout{display:flex;flex-direction:column;gap:28px;align-items:center}
+.halo-head{order:-1;text-align:center;max-width:520px}
+.halo-head h2{margin-top:14px;font-size:clamp(26px,3.4vw,36px);font-weight:800;line-height:1.3;word-break:keep-all}
+.halo-wrap{width:100%}
 .halo{position:relative;height:340px;overflow:hidden;touch-action:pan-y;cursor:grab;user-select:none}
 .halo:active{cursor:grabbing}
 .halo-card{position:absolute;top:50%;border-radius:14px;overflow:hidden;box-shadow:0 10px 30px rgba(17,24,39,.18);transition:transform .7s cubic-bezier(.4,0,.2,1)}
@@ -165,6 +168,11 @@ section{scroll-margin-top:76px}
 .halo-cap{position:absolute;left:0;right:0;bottom:0;padding:20px 10px 8px;background:linear-gradient(0deg,rgba(0,0,0,.68),transparent);color:#fff;font-size:11px;font-weight:700;opacity:0;transition:opacity .3s;text-align:center}
 .halo-card.is-front .halo-cap{opacity:1}
 @media(min-width:701px){ .halo{height:440px} }
+@media(min-width:901px){
+  .halo-layout{flex-direction:row;align-items:center;gap:40px}
+  .halo-head{order:2;text-align:left;flex:0 0 300px}
+  .halo-wrap{flex:1 1 auto;min-width:0}
+}
 
 /* ── Reviews (placeholder) ── */
 .review-empty{max-width:680px;margin:0 auto;text-align:center;padding:56px var(--pad);border:1px dashed var(--line);border-radius:var(--radius);background:var(--bg-soft)}
@@ -448,12 +456,14 @@ footer b{color:var(--ink);font-weight:800}
 
 <!-- Case Study -->
 <section id="case-study" class="sec wrap">
-  <div class="section-head">
-    <span class="eyebrow">REPRESENTATIVE WORK</span>
-    <h2>완성한 작품을<br>하나씩 둘러보세요</h2>
-  </div>
-  <div class="halo-wrap">
-    <div class="halo" id="haloReel" aria-roledescription="carousel" aria-label="대표 포트폴리오"></div>
+  <div class="halo-layout">
+    <div class="halo-wrap">
+      <div class="halo" id="haloReel" aria-roledescription="carousel" aria-label="대표 포트폴리오"></div>
+    </div>
+    <div class="halo-head">
+      <span class="eyebrow">REPRESENTATIVE WORK</span>
+      <h2>완성한 작품을<br>하나씩 둘러보세요</h2>
+    </div>
   </div>
 </section>
 
