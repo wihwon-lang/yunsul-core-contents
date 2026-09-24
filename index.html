@@ -156,16 +156,15 @@ section{scroll-margin-top:76px}
 .work-note{margin-top:32px;text-align:center;color:var(--ink-soft);font-size:14px}
 @media(min-width:701px){ .work-row{grid-template-columns:repeat(3,1fr)} }
 
-/* ── Case Study ── */
-.case{display:grid;grid-template-columns:1fr;gap:32px;align-items:center}
-.case-visual{border-radius:var(--radius);overflow:hidden;border:1px solid var(--line);aspect-ratio:16/10}
-.case-visual img{width:100%;height:100%;object-fit:cover}
-.case-body h2{font-size:clamp(26px,3.4vw,36px);font-weight:800;line-height:1.3;word-break:keep-all}
-.case-body p{margin-top:16px;color:var(--ink-soft);font-size:16px}
-.case-list{margin-top:22px;display:flex;flex-direction:column;gap:12px}
-.case-list li{list-style:none;position:relative;padding-left:24px;font-size:15px}
-.case-list li::before{content:'';position:absolute;left:0;top:8px;width:8px;height:8px;border-radius:50%;background:var(--grad)}
-@media(min-width:901px){ .case{grid-template-columns:1fr 1fr} }
+/* ── Halo Reel (Case Study) ── */
+.halo-wrap{max-width:760px;margin:0 auto}
+.halo{position:relative;height:300px;overflow:hidden;touch-action:pan-y;cursor:grab;user-select:none}
+.halo:active{cursor:grabbing}
+.halo-card{position:absolute;left:50%;top:50%;border-radius:14px;overflow:hidden;box-shadow:0 10px 30px rgba(17,24,39,.18);transition:transform .7s cubic-bezier(.4,0,.2,1)}
+.halo-card img{width:100%;height:100%;object-fit:cover;display:block;pointer-events:none;user-select:none}
+.halo-cap{position:absolute;left:0;right:0;bottom:0;padding:20px 10px 8px;background:linear-gradient(0deg,rgba(0,0,0,.68),transparent);color:#fff;font-size:11px;font-weight:700;opacity:0;transition:opacity .3s;text-align:center}
+.halo-card.is-front .halo-cap{opacity:1}
+@media(min-width:701px){ .halo{height:380px} }
 
 /* ── Reviews (placeholder) ── */
 .review-empty{max-width:680px;margin:0 auto;text-align:center;padding:56px var(--pad);border:1px dashed var(--line);border-radius:var(--radius);background:var(--bg-soft)}
@@ -449,18 +448,12 @@ footer b{color:var(--ink);font-weight:800}
 
 <!-- Case Study -->
 <section id="case-study" class="sec wrap">
-  <div class="case">
-    <div class="case-visual"><img src="portfolio/video/changwon-hanshin-thehue.jpg" alt="분양 현장 온라인 홍보 지원 사례"></div>
-    <div class="case-body">
-      <span class="eyebrow">STRATEGY CASE</span>
-      <h2>분양 현장<br>온라인 홍보 지원</h2>
-      <p>오프라인 견본주택 방문만으로는 부족했던 인지도를, 릴스와 홍보 영상으로 넓혀 온라인에서도 문의가 이어지도록 설계했습니다.</p>
-      <ul class="case-list">
-        <li>지역 인지도를 SNS 릴스 조회수·문의로 연결</li>
-        <li>단지별 핵심 소구점(입지·교통·생활환경)을 짧은 영상으로 정리</li>
-        <li>견본주택 방문 전부터 관심을 만드는 홍보 흐름 설계</li>
-      </ul>
-    </div>
+  <div class="section-head">
+    <span class="eyebrow">REPRESENTATIVE WORK</span>
+    <h2>완성한 작품을<br>하나씩 둘러보세요</h2>
+  </div>
+  <div class="halo-wrap">
+    <div class="halo" id="haloReel" aria-roledescription="carousel" aria-label="대표 포트폴리오"></div>
   </div>
 </section>
 
@@ -600,6 +593,98 @@ if(reduceMotion){
   if(reduceMotion){ place(0); return; }
   function tick(){ place(video.currentTime||0); requestAnimationFrame(tick); }
   requestAnimationFrame(tick);
+})();
+
+(function(){
+  var stage=document.getElementById('haloReel');
+  if(!stage) return;
+  var items=[
+    {src:'portfolio/video/hillstate-yangsan.jpg', alt:'힐스테이트 양산더스카이 분양 영상', title:'힐스테이트 양산더스카이'},
+    {src:'portfolio/video/forest-heritage.jpg', alt:'국가산림문화자산 AI 홍보 영상', title:'국가산림문화자산'},
+    {src:'portfolio/ai-model/jijeok.jpg', alt:'지적형 AI 모델 이미지', title:'AI 모델 이미지', pos:'center 15%'},
+    {src:'portfolio/cardnews/policy-illust/01.jpg', alt:'부동산 정책 업데이트 카드뉴스', title:'부동산 정책 업데이트', pos:'center top'},
+    {src:'portfolio/onepage/06.jpg', alt:'패션 데님 상품 홍보 원페이지 릴스', title:'데님 상품 홍보', pos:'center 15%'},
+    {src:'portfolio/detail-page/dalba-toneup.jpg', alt:"d'Alba 톤업 선크림 상세페이지", title:"d'Alba 톤업 선크림", pos:'center top'},
+    {src:'portfolio/video/medicube-pink-serum.jpg', alt:'medicube 핑크 펩타이드 세럼 AI 광고 영상', title:'medicube 핑크 펩타이드 세럼'},
+    {src:'portfolio/onepage/04.jpg', alt:'뷰티 앰플 상품 홍보 원페이지 릴스', title:'앰플 상품 홍보', pos:'center top'}
+  ];
+  var count=items.length, step=Math.PI*2/count, rotation=0;
+  var cardW=150, cardH=200, minScale=0.5;
+  var radiusXRatio=0.34, radiusYRatio=0.30;
+  var radiusX=0, radiusY=0, fit=1;
+
+  var cards=items.map(function(item){
+    var el=document.createElement('div');
+    el.className='halo-card';
+    var img=document.createElement('img');
+    img.src=item.src; img.alt=item.alt; img.loading='lazy';
+    if(item.pos) img.style.objectPosition=item.pos;
+    el.appendChild(img);
+    var cap=document.createElement('div');
+    cap.className='halo-cap'; cap.textContent=item.title;
+    el.appendChild(cap);
+    stage.appendChild(el);
+    return el;
+  });
+
+  function measure(){
+    var w=stage.clientWidth, h=stage.clientHeight;
+    radiusX=w*radiusXRatio; radiusY=h*radiusYRatio;
+    fit=Math.max(0.5, Math.min(1, Math.min(w/(radiusX+cardW), h/(2*radiusY+cardH))));
+    var w2=cardW*fit, h2=cardH*fit;
+    cards.forEach(function(el){
+      el.style.width=w2+'px'; el.style.height=h2+'px';
+      el.style.marginLeft=(-w2/2)+'px'; el.style.marginTop=(-h2/2)+'px';
+    });
+  }
+
+  function render(){
+    cards.forEach(function(el,i){
+      var theta=i*step+rotation;
+      var c=Math.cos(theta), s=Math.sin(theta);
+      var x=c*radiusX, y=s*radiusY;
+      var scale=minScale+(1-minScale)*((c+1)/2);
+      el.style.transform='translate('+x+'px,'+y+'px) scale('+scale+')';
+      el.style.zIndex=Math.round(scale*1000);
+      el.classList.toggle('is-front', scale>0.96);
+    });
+  }
+
+  measure(); render();
+  window.addEventListener('resize', function(){ measure(); render(); });
+
+  var paused=false, dragging=false;
+  if(!reduceMotion){
+    (function scheduleNext(){
+      setTimeout(function(){
+        if(!paused && !dragging){ rotation-=step; render(); }
+        scheduleNext();
+      }, 2200);
+    })();
+  }
+  stage.addEventListener('mouseenter', function(){ paused=true; });
+  stage.addEventListener('mouseleave', function(){ paused=false; });
+
+  var startX=0, startRotation=0;
+  stage.addEventListener('pointerdown', function(e){
+    dragging=true; startX=e.clientX; startRotation=rotation;
+    stage.setPointerCapture(e.pointerId);
+    cards.forEach(function(el){ el.style.transition='none'; });
+  });
+  stage.addEventListener('pointermove', function(e){
+    if(!dragging) return;
+    rotation=startRotation+(e.clientX-startX)/140;
+    render();
+  });
+  function endDrag(e){
+    if(!dragging) return;
+    dragging=false;
+    cards.forEach(function(el){ el.style.transition=''; });
+    rotation=Math.round(rotation/step)*step;
+    render();
+  }
+  stage.addEventListener('pointerup', endDrag);
+  stage.addEventListener('pointercancel', endDrag);
 })();
 </script>
 
