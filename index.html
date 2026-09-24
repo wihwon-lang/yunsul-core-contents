@@ -168,7 +168,7 @@ section{scroll-margin-top:76px}
 .halo-note{display:none;color:var(--ink-soft);font-size:16px;line-height:1.7}
 @media(min-width:701px){ .halo{height:440px} }
 @media(min-width:901px){
-  .halo-note{display:block;position:absolute;top:50%;transform:translateY(-50%);max-width:260px}
+  .halo-note{display:block;position:absolute;top:50%;transform:translateY(-50%);max-width:320px;font-size:21px;line-height:1.55;font-weight:500}
 }
 
 /* ── Reviews (placeholder) ── */
@@ -653,7 +653,7 @@ if(reduceMotion){
     });
     if(headEl){
       if(window.matchMedia('(min-width:901px)').matches){
-        headEl.style.left=(centerXRatio*w+radiusX+w2/2+72)+'px';
+        headEl.style.left=(centerXRatio*w+radiusX+w2/2+150)+'px';
       } else {
         headEl.style.left='';
       }
