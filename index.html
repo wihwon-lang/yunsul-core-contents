@@ -223,7 +223,8 @@ footer{border-top:1px solid var(--line);padding:32px var(--pad);display:flex;fle
 footer b{color:var(--ink);font-weight:800}
 
 /* ── 플로팅 문의 버튼 ── */
-.float-cta{position:fixed;right:20px;bottom:20px;z-index:70;box-shadow:0 12px 28px rgba(18,102,232,.35)}
+.float-cta{position:fixed;right:20px;bottom:20px;z-index:70;box-shadow:0 12px 28px rgba(18,102,232,.35);transition:opacity .2s,transform .2s}
+.float-cta.is-hidden{opacity:0;transform:translateY(8px);pointer-events:none}
 
 @media(max-width:1000px){
   .bar nav{display:none}
@@ -582,6 +583,16 @@ if(reduceMotion){
   var v=document.querySelector('.hero-visual video');
   if(v){v.removeAttribute('autoplay');v.pause();}
 }
+
+(function(){
+  var fab=document.querySelector('.float-cta');
+  var footer=document.querySelector('footer');
+  if(!fab||!footer||!('IntersectionObserver' in window)) return;
+  var io=new IntersectionObserver(function(entries){
+    entries.forEach(function(e){ fab.classList.toggle('is-hidden', e.isIntersecting); });
+  });
+  io.observe(footer);
+})();
 
 (function(){
   var THEMES=['분양','브랜드','숏폼','릴스','이미지','상세페이지','AI모델'];
