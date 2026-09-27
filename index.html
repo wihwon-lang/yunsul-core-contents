@@ -188,6 +188,14 @@ section{scroll-margin-top:76px}
 .review-empty{max-width:680px;margin:0 auto;text-align:center;padding:56px var(--pad);border:1px dashed var(--line);border-radius:var(--radius);background:var(--bg-soft)}
 .review-empty p{color:var(--ink-soft);font-size:16px;line-height:1.7}
 .review-empty .btn{margin-top:24px}
+.quote-form{margin-top:28px;text-align:left;display:flex;flex-direction:column;gap:12px}
+.quote-row{display:flex;flex-direction:column;gap:12px}
+.quote-form input,.quote-form select,.quote-form textarea{width:100%;padding:12px 14px;border:1px solid var(--line);border-radius:10px;font:inherit;font-size:14px;color:var(--ink);background:#fff}
+.quote-form select{color:var(--ink-soft)}
+.quote-form select:valid{color:var(--ink)}
+.quote-form textarea{resize:vertical;min-height:90px}
+.quote-form button{align-self:center;margin-top:4px;border:none;cursor:pointer}
+@media(min-width:601px){ .quote-row{flex-direction:row} .quote-row input{flex:1;min-width:0} }
 
 /* ── FAQ ── */
 .faq-list{max-width:760px;margin:0 auto;display:flex;flex-direction:column;gap:12px}
@@ -493,7 +501,24 @@ footer b{color:var(--ink);font-weight:800}
     </div>
     <div class="review-empty">
       <p>아직 공개된 후기는 없지만, 지금 진행 중인 프로젝트들의 결과가 곧 이 자리를 채울 예정입니다.<br>가장 먼저 함께해 주시는 분의 이야기를 소중히 담겠습니다.</p>
-      <a class="btn btn-grad" href="tel:15997286">첫 프로젝트 문의하기</a>
+      <form class="quote-form" id="quoteForm">
+        <div class="quote-row">
+          <input type="text" name="name" placeholder="이름" required>
+          <input type="text" name="contact" placeholder="연락처 (전화번호 또는 카카오 ID)" required>
+        </div>
+        <select name="service" required>
+          <option value="" disabled selected>관심 서비스 선택</option>
+          <option>부동산 분양 마케팅</option>
+          <option>AI 영상 제작</option>
+          <option>브랜드·SNS 콘텐츠</option>
+          <option>AI 이미지 제작</option>
+          <option>상세페이지 제작</option>
+          <option>홈페이지 제작</option>
+          <option>잘 모르겠어요 / 상담 필요</option>
+        </select>
+        <textarea name="message" placeholder="어떤 도움이 필요하신지 간단히 적어주세요" rows="4" required></textarea>
+        <button type="submit" class="btn btn-grad">무료 견적 요청하기</button>
+      </form>
     </div>
   </div>
 </section>
@@ -596,6 +621,21 @@ if(reduceMotion){
   var v=document.querySelector('.hero-visual video');
   if(v){v.removeAttribute('autoplay');v.pause();}
 }
+
+(function(){
+  var form=document.getElementById('quoteForm');
+  if(!form) return;
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+    var name=form.name.value.trim();
+    var contact=form.contact.value.trim();
+    var service=form.service.value;
+    var message=form.message.value.trim();
+    var subject='[홈페이지 견적 요청] '+name+'님';
+    var body='이름: '+name+'\n연락처: '+contact+'\n관심 서비스: '+service+'\n\n문의 내용:\n'+message;
+    window.location.href='mailto:wihwon@naver.com?subject='+encodeURIComponent(subject)+'&body='+encodeURIComponent(body);
+  });
+})();
 
 (function(){
   var fab=document.querySelector('.float-cta');
